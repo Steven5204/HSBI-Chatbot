@@ -1,0 +1,110 @@
+/* === Allgemeines Layout === */
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.chat-container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 650px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* === Header === */
+.chat-header {
+  background: linear-gradient(135deg, #0052cc, #2684ff);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+.chat-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.chat-header p {
+  margin: 5px 0 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* === Chatfenster === */
+.chat-window {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Chatblasen === */
+.message {
+  max-width: 80%;
+  margin-bottom: 15px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: #0052cc;
+  color: #fff;
+  border-bottom-right-radius: 0;
+}
+
+.bot-msg {
+  align-self: flex-start;
+  background: #e9ecef;
+  color: #333;
+  border-bottom-left-radius: 0;
+}
+
+/* === Eingabebereich === */
+.input-area {
+  display: flex;
+  border-top: 1px solid #ddd;
+  padding: 10px;
+  background: #fff;
+}
+.input-area input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+.input-area button {
+  background: #0052cc;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.input-area button:hover {
+  background: #003d99;
+}
+
+/* === Scrollbar Styling === */
+.chat-window::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-window::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 8px;
+}

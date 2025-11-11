@@ -1,0 +1,16 @@
+{
+  "business_master": {
+    "required_degree": [
+      "Bachelor",
+      "Diplom"
+    ],
+    "min_experience_years": 2,
+    "min_grade": 2.5,
+    "required_documents": [
+      "Bachelorzeugnis",
+      "Lebenslauf",
+      "Arbeitszeugnis",
+      "Motivationsschreiben"
+    ]
+  }
+}
