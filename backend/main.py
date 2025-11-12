@@ -27,7 +27,7 @@ async def chat(request: Request):
         welcome_message = (
             "🎓 Willkommen beim Studienberater-Chatbot!\n\n"
             "Ich helfe Ihnen herauszufinden, ob Sie die Zulassungsvoraussetzungen "
-            "für den berufsbegleitenden Master erfüllen.\n\n"
+            "für den Master erfüllen.\n\n"
             "Bitte beantworten Sie mir ein paar kurze Fragen. "
             "Tippen Sie 'Start', um zu beginnen."
         )
@@ -55,7 +55,7 @@ async def chat(request: Request):
 
         {summary}
 
-        Prüfe anhand der allgemeinen Zulassungsvoraussetzungen für Masterstudiengänge
+        Prüfe anhand der dir bekannten Zulassungsvoraussetzungen für Masterstudiengänge
         und gib eine klare Entscheidung:
         - Ob die Voraussetzungen erfüllt sind
         - Falls nicht: welche Punkte fehlen
