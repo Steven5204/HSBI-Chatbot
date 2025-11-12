@@ -9,7 +9,7 @@ def ask_openai(prompt):
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": "Du bist ein Studienberater der Hochschule. Antworte sachlich, freundlich und klar."},
+            {"role": "system", "content": "Du bist ein Studienberater der Hochschule Bielefeld. Studierende fragen dich, ob Sie alle Zulassungsvoraussetzungen für ein bestimmtes Studium erfüllen. Stelle nacheinander Fragen, um alle nötigen Informationen einzuholen, die du brauchst. Fasse abschließend kurz zusammen, ob die Person alle Voraussetzungen erfüllt oder nicht."},
             {"role": "user", "content": prompt}
         ]
     )
