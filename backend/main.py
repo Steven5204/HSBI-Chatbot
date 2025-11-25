@@ -2,6 +2,8 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from openai_client import ask_openai
 from conversation import get_next_question, update_state, summarize_answers
+from rules_handler import load_rules, get_general_requirements, get_program_requirements
+import json
 
 app = FastAPI()
 
@@ -11,6 +13,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Regelwerk einmalig beim Start laden
+RULES = load_rules("rules.json")
+GENERAL_RULES = get_general_requirements(RULES)
+
 
 # Zwischenspeicher für Sitzungsdaten (einfach für MVP)
 SESSIONS = {}
@@ -48,19 +55,31 @@ async def chat(request: Request):
         progress = int((state["current_index"] / 5) * 100)
         return {"response": next_question, "progress": progress}
     else:
-        # Alle Fragen beantwortet → Zusammenfassung + KI-Bewertung
+        # Alle Antworten gesammelt → Bewertung
         summary = summarize_answers(state)
+
+        # Allgemeine Regeln
+        gen_rules_text = "\n".join(
+            [f"- {k}: {v}" for k, v in GENERAL_RULES.items()]
+        )
+
         prompt = f"""
-        Hier sind die Angaben eines Studieninteressierten:
+        Ein Studieninteressierter hat folgende Angaben gemacht:
 
         {summary}
 
-        Prüfe anhand der dir bekannten Zulassungsvoraussetzungen für Masterstudiengänge
-        und gib eine klare Entscheidung:
-        - Ob die Voraussetzungen erfüllt sind
-        - Falls nicht: welche Punkte fehlen
+        Nutze das folgende Regelwerk, um zu beurteilen, ob die Person die Voraussetzungen erfüllt:
+
+        Allgemeine Zugangsvoraussetzungen:
+        {gen_rules_text}
+
+        Studiengangsspezifische Anforderungen:
+        {json.dumps(RULES["Masterstudium_Berufsbegleitend"]["Studiengänge"], indent=2, ensure_ascii=False)}
+
+        Antworte bitte in natürlicher Sprache, mit einer klaren Begründung,
+        ob die Zulassungsvoraussetzungen erfüllt sind, teilweise erfüllt oder nicht erfüllt.
         """
 
         decision = ask_openai(prompt)
-        SESSIONS.pop(user_id, None)  # Sitzung zurücksetzen
+        SESSIONS.pop(user_id, None)
         return {"response": decision, "progress": 100}

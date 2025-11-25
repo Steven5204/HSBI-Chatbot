@@ -1,16 +1,46 @@
 {
-  "business_master": {
-    "required_degree": [
-      "Bachelor",
-      "Diplom"
-    ],
-    "min_experience_years": 2,
-    "min_grade": 2.5,
-    "required_documents": [
-      "Bachelorzeugnis",
-      "Lebenslauf",
-      "Arbeitszeugnis",
-      "Motivationsschreiben"
-    ]
+  "Masterstudium_Berufsbegleitend": {
+    "Allgemeine_Zugangsvoraussetzungen": {
+      "Berufserfahrung": "Mindestens 1 Jahr einschlägige Berufserfahrung nach dem Bachelorabschluss",
+      "Mindestnote_Bachelor": "2.9",
+      "ECTS_Bachelor": 210,
+      "Technisches_Englisch": "Mindestens befriedigend"
+    },
+
+    "Studiengänge": {
+      "Angewandte_Automatisierung": {
+        "ECTS_Anforderungen": {
+          "Elektrotechnik": 40,
+          "Mathematik": 15,
+          "Informatik": 20
+        },
+        "Hinweis": "Absolvent:innen von Elektrotechnik (Vollzeit BI, MI, Verbund BI), Ingenieurinformatik (Vollzeit BI), Mechatronik/Automatisierung (GT) an der HSBI erfüllen in der Regel die Voraussetzungen."
+      },
+
+      "Digitale_Technologien": {
+        "ECTS_Anforderungen": {
+          "Mathematik": 15,
+          "Informatik": 15
+        },
+        "Hinweis": "Absolvent:innen von Angewandter Mathematik oder Ingenieurinformatik der HSBI erfüllen in der Regel die Voraussetzungen."
+      },
+
+      "Wirtschaftsingenieurwesen": {
+        "ECTS_Anforderungen": {
+          "Betriebswirtschaft": 40,
+          "Mathematisch_Naturwissenschaftlich": 25,
+          "Technisch": 50
+        },
+        "Hinweis": "Absolvent:innen des Bachelor Wirtschaftsingenieurwesen der HSBI erfüllen in der Regel die Voraussetzungen."
+      },
+
+      "Maschinenbau": {
+        "Start": "Voraussichtlich ab Sommersemester 2026",
+        "ECTS_Anforderungen": {
+          "Maschinenbau_Bachelor": 50
+        },
+        "Hinweis": "Absolvent:innen des Bachelor Maschinenbau der HSBI erfüllen in der Regel die Voraussetzungen."
+      }
+    }
   }
 }
