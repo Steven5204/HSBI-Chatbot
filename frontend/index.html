@@ -2,34 +2,50 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Studienberater Chatbot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studienberater HSBI</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-
-
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-header">
-      <h1>🎓 Studienberater</h1>
-      <p>Ihr digitaler Assistent für Studienvoraussetzungen</p>
-    </div>
-
-    <div id="chat-window" class="chat-window"></div>
-
-    <div class="progress-container">
-      <div class="progress-bar">
-        <div id="progress-fill" class="progress-fill"></div>
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <img src="fox.png" alt="HSBI Maskottchen" class="mascot" />
+      <div>
+        <h1>🎓 Studienberater HSBI</h1>
+        <p>Zulassungscheck für Masterstudiengänge</p>
       </div>
-      <p id="progress-text" class="progress-text">Fortschritt: 0%</p>
     </div>
+    <div class="settings-icon">⚙️</div>
+  </header>
 
-    <div class="input-area">
-      <input id="user-input" type="text" placeholder="Ihre Frage..." autocomplete="off">
-      <button id="send-btn">Senden</button>
-    </div>
-  </div>
+  <main>
+    <!-- Fortschrittsanzeige -->
+    <aside class="progress-panel">
+      <div class="progress-bar-container">
+        <div id="progress-bar" class="progress-bar"></div>
+      </div>
+      <p id="progress-text">0%<br>Fortschritt</p>
+    </aside>
+
+    <!-- Chatbereich -->
+    <section class="chat-section">
+      <div id="chat-window" class="chat-window"></div>
+
+      <!-- Aktionsbuttons -->
+      <div class="action-buttons">
+        <button id="start-btn" class="primary">START</button>
+        <button id="help-btn" class="secondary">HILFE & FAQ</button>
+        <button id="apply-btn" class="disabled" disabled>BEWERBUNG STARTEN</button>
+      </div>
+
+      <!-- Eingabebereich -->
+      <div class="input-area">
+        <input id="user-input" type="text" placeholder="Ihre Frage..." autocomplete="off" />
+        <button id="send-btn">➤</button>
+      </div>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
