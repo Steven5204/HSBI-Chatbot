@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from openai_client import ask_openai
 from conversation import get_next_question, update_state, summarize_answers
-from rules_handler import load_rules, get_general_requirements, get_program_requirements
+from rules_excel import load_excel_rules, get_program_requirements, get_general_requirements
 import json
 
 app = FastAPI()
@@ -15,7 +15,7 @@ app.add_middleware(
 )
 
 # Regelwerk einmalig beim Start laden
-RULES = load_rules("rules.json")
+RULES = load_excel_rules("zulassung.xlsx")
 GENERAL_RULES = get_general_requirements(RULES)
 
 
@@ -74,7 +74,7 @@ async def chat(request: Request):
         {gen_rules_text}
 
         Studiengangsspezifische Anforderungen:
-        {json.dumps(RULES["Masterstudium_Berufsbegleitend"]["Studiengänge"], indent=2, ensure_ascii=False)}
+        {json.dumps(RULES["Studiengänge"], indent=2, ensure_ascii=False)}
 
         Antworte bitte in natürlicher Sprache, mit einer klaren Begründung,
         ob die Zulassungsvoraussetzungen erfüllt sind, teilweise erfüllt oder nicht erfüllt.
