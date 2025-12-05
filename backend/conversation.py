@@ -102,7 +102,7 @@ def get_next_question(state):
     # Wenn Abschlussziel noch nicht gewählt → zuerst danach fragen
     if "abschlussziel" not in state:
         return {
-            "id": "abschlussziel",
+            "key": "abschlussziel",
             "text": "Für welchen Abschluss interessieren Sie sich?",
             "options": ["Bachelor", "Master"]
         }
@@ -110,7 +110,7 @@ def get_next_question(state):
     # 🟦 Wenn Bachelor → frage nach Hochschulzugangsberechtigung
     if state["abschlussziel"].lower() == "bachelor" and "hochschulzugang" not in state:
         return {
-            "id": "hochschulzugang",
+            "key": "hochschulzugang",
             "text": "Besitzen Sie eine Hochschulzugangsberechtigung (z. B. Abitur, Fachabitur oder eine berufliche Qualifikation)?",
             "options": ["Ja", "Nein"]
         }
@@ -119,7 +119,13 @@ def get_next_question(state):
     if state["abschlussziel"].lower() == "master":
         # z. B. Fragen wie hsbi_bachelor, bachelorstudiengang, studiengang usw.
         for q in questions:
-            if q["id"] not in state:
+            if "depends_on" in q:
+                key, value = list(q["depends_on"].items())[0]
+                if state.get(key, "").lower() != value.lower():
+                    continue  # Bedingung nicht erfüllt → überspringen
+
+            # Nur unbeantwortete Fragen anzeigen
+            if q["key"] not in state:
                 return q
 
     # Wenn alle Fragen beantwortet → keine mehr
