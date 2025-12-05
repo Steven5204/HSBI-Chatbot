@@ -1,85 +1,116 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from openai_client import ask_openai
-from conversation import get_next_question, update_state, summarize_answers
-from rules_excel import load_excel_rules, get_program_requirements, get_general_requirements
-import json
+from pydantic import BaseModel
+from conversation import (
+    questions,
+    update_state,
+    get_next_question,
+    get_ects_info,
+    condition_met,
+    count_relevant_questions,
+    RULES
+)
+from matching import (
+    evaluate_bachelor,
+    evaluate_master_intern,
+    evaluate_master_extern
+)
+from logging_handler import log_event
 
-app = FastAPI()
+app = FastAPI(title="HSBI Chatbot Bifi")
 
+# ✅ CORS erlauben für dein Frontend (egal ob Live Server oder lokal)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Regelwerk einmalig beim Start laden
-RULES = load_excel_rules("zulassung.xlsx")
-GENERAL_RULES = get_general_requirements(RULES)
-
-
-# Zwischenspeicher für Sitzungsdaten (einfach für MVP)
+# ✅ Session-Speicher
 SESSIONS = {}
 
+# ✅ Request-Struktur
+class ChatRequest(BaseModel):
+    message: str
+    user_id: str
+
+
 @app.post("/chat")
-async def chat(request: Request):
-    data = await request.json()
-    user_id = data.get("user_id", "default")
-    user_input = data.get("message")
+async def chat(request: ChatRequest):
+    user_id = request.user_id
+    user_input = request.message.strip()
 
-    # Initialer Zustand pro Nutzer
+    # Initialisiere Session
     if user_id not in SESSIONS:
-        SESSIONS[user_id] = {"current_index": 0}
-        welcome_message = (
-            "🎓 Willkommen beim Studienberater-Chatbot!\n\n"
-            "Ich helfe Ihnen herauszufinden, ob Sie die Zulassungsvoraussetzungen "
-            "für den Master erfüllen.\n\n"
-            "Bitte beantworten Sie mir ein paar kurze Fragen. "
-            "Tippen Sie 'Start', um zu beginnen."
-        )
-        return {"response": welcome_message, "progress": 0}
+        SESSIONS[user_id] = {"state": {}, "progress": 0}
 
-    # Aktuelle Sitzung abrufen
-    state = SESSIONS[user_id]
+    state = SESSIONS[user_id]["state"]
 
-    # Benutzer antwortet -> speichern
-    if user_input.lower() != "start":
-        state = update_state(state, user_input)
-        SESSIONS[user_id] = state
+    # 1️⃣ Antwort speichern / Zustand aktualisieren
+    state = update_state(state, user_input)
 
-    # Nächste Frage bestimmen
-    next_question = get_next_question(state)
+    # 2️⃣ ECTS-Hinweis (nur einmal pro Studiengang)
+    ects_info = get_ects_info(state, RULES)
+    if ects_info:
+        return {"response": ects_info, "progress": SESSIONS[user_id]["progress"], "options": None}
 
-    if next_question:
-        progress = int((state["current_index"] / 5) * 100)
-        return {"response": next_question, "progress": progress}
+    # 3️⃣ Nächste Frage holen
+    question = get_next_question(state)
+    if question:
+        text = question["text"]
+        options = question.get("options")
+
+        # Fortschritt berechnen
+        answered = len([k for k in state.keys() if k in [q["key"] for q in questions]])
+        total = len([q for q in questions if condition_met(state, q)])
+        progress = int((answered / total) * 100)
+        SESSIONS[user_id]["progress"] = progress
+
+        return {"response": text, "progress": progress, "options": options}
+
+    # 4️⃣ Wenn keine Frage mehr → Entscheidung berechnen
+    category = state.get("nutzerkategorie")
+    if category == "bachelor":
+        decision, explanation = evaluate_bachelor(state)
+    elif category == "master_intern":
+        decision, explanation = evaluate_master_intern(state, RULES["Allgemein"])
+    elif category == "master_extern":
+        program = state.get("studiengang")
+        program_rules = RULES["Studiengänge"].get(program, {}).get("ECTS_Anforderungen", {})
+        decision, explanation = evaluate_master_extern(state, program_rules, RULES["Allgemein"])
     else:
-        # Alle Antworten gesammelt → Bewertung
-        summary = summarize_answers(state)
+        decision, explanation = "Unklar", "Keine ausreichenden Angaben."
 
-        # Allgemeine Regeln
-        gen_rules_text = "\n".join(
-            [f"- {k}: {v}" for k, v in GENERAL_RULES.items()]
-        )
+    # Logging
+    try:
+        log_event({
+            "user_id": user_id,
+            "nutzerkategorie": category,
+            "studiengang": state.get("studiengang"),
+            "abschlussziel": state.get("abschlussziel"),
+            "entscheidung": decision,
+            "completed": True
+        })
+    except Exception as e:
+        print(f"[WARN] Logging fehlgeschlagen: {e}")
 
-        prompt = f"""
-        Ein Studieninteressierter hat folgende Angaben gemacht:
+    # Session löschen
+    SESSIONS.pop(user_id, None)
 
-        {summary}
+    return {
+        "response": f"📋 Entscheidung: {decision}\n\n{explanation}",
+        "progress": 100,
+        "options": None
+    }
 
-        Nutze das folgende Regelwerk, um zu beurteilen, ob die Person die Voraussetzungen erfüllt:
 
-        Allgemeine Zugangsvoraussetzungen:
-        {gen_rules_text}
+@app.get("/")
+def home():
+    return {"status": "Bifi Backend läuft 🚀", "sessions": len(SESSIONS)}
 
-        Studiengangsspezifische Anforderungen:
-        {json.dumps(RULES["Studiengänge"], indent=2, ensure_ascii=False)}
 
-        Antworte bitte in natürlicher Sprache, mit einer klaren Begründung,
-        ob die Zulassungsvoraussetzungen erfüllt sind, teilweise erfüllt oder nicht erfüllt.
-        """
-
-        decision = ask_openai(prompt)
-        SESSIONS.pop(user_id, None)
-        return {"response": decision, "progress": 100}
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=5000)

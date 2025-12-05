@@ -179,3 +179,41 @@ button.success {
   width: 40px;
   height: 40px;
 }
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 10px 0 20px 0;
+}
+
+.option-button {
+    background: linear-gradient(135deg, #0099ff, #0066ff);
+    border: none;
+    padding: 12px 20px;
+    color: white;
+    font-size: 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    width: fit-content;
+}
+
+.option-button:hover {
+    background: linear-gradient(135deg, #0077cc, #0055cc);
+    transform: translateY(-2px);
+}
+
+.message {
+  word-wrap: break-word;
+}
+
+.bot-msg {
+  background: #e9f2ff;
+  color: #003366;
+}
+
+.user-msg {
+  background: #0078ff;
+  color: #fff;
+}
