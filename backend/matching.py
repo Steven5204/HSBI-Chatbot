@@ -11,44 +11,89 @@ def evaluate_bachelor(applicant):
     }
     return ("Ja" if hz != "Ausländische Hochschulzugangsberechtigung" else "Unklar", mapping.get(hz, "Unbekannte HZB."))
 
-def evaluate_master_intern(applicant, general_rules):
+def evaluate_master_intern(applicant, rules):
+    """Prüft interne Bewerber (HSBI) dynamisch anhand der Excel-Regeln."""
+    general = rules.get("Allgemein", {})
+    studies = rules.get("Studiengänge", {})
+
     issues = []
+    bachelor = applicant.get("bachelor_hsbi")
+    target = applicant.get("studiengang")
+
+    # === Allgemeine Anforderungen dynamisch prüfen ===
     try:
         note = float(applicant.get("abschlussnote", 5))
-        if note > float(general_rules.get("Mindestnote_Bachelor", 2.5)):
-            issues.append("Abschlussnote zu schlecht.")
-    except ValueError:
-        issues.append("Ungültige Note.")
+        min_note = float(general.get("Mindestnote_Bachelor", 2.5))
+        if note > min_note:
+            issues.append(f"Abschlussnote ({note}) liegt über dem Grenzwert ({min_note}).")
+    except Exception:
+        issues.append("Ungültige Abschlussnote.")
+
     try:
         erf = int(applicant.get("berufserfahrung_jahre", 0))
-        if erf < int(general_rules.get("Berufserfahrung_Jahre", 1)):
-            issues.append("Zu wenig Berufserfahrung.")
-    except ValueError:
+        min_erf = int(general.get("Berufserfahrung_Jahre", 1))
+        if erf < min_erf:
+            issues.append(f"Nur {erf} Jahre Berufserfahrung (erforderlich: {min_erf}).")
+    except Exception:
         issues.append("Ungültige Berufserfahrung.")
+
     engl_map = {"Sehr gut": 1, "Gut": 2, "Befriedigend": 3, "Ausreichend": 4, "Mangelhaft": 5}
     user_lvl = engl_map.get(applicant.get("englischkenntnisse"))
-    req_lvl = int(general_rules.get("Technisches_Englisch", 3))
+    req_lvl = int(general.get("Technisches_Englisch", 3))
     if user_lvl and user_lvl > req_lvl:
         issues.append("Englischniveau nicht ausreichend.")
-    if not issues:
-        return ("Ja", "Sie erfüllen die Voraussetzungen.")
-    elif len(issues) <= 2:
-        return ("Unklar", "Einige Angaben sind grenzwertig:\n- " + "\n- ".join(issues))
-    else:
-        return ("Nein", "Sie erfüllen die Voraussetzungen leider nicht:\n- " + "\n- ".join(issues))
 
-def evaluate_master_extern(applicant, program_rules, general_rules):
-    status, text = evaluate_master_intern(applicant, general_rules)
-    if status == "Nein":
-        return ("Nein", text)
-    ects_user = applicant.get("ects", {})
-    ects_issues = []
-    for cat, needed in program_rules.items():
-        if ects_user.get(cat, 0) < needed:
-            ects_issues.append(f"Zu wenige ECTS in {cat} (min. {needed})")
-    if not ects_issues and status == "Ja":
+    # === Modulvergleich Bachelor → Ziel-Master ===
+    if bachelor in studies and target in studies:
+        src_mods = studies[bachelor]["ECTS_Anforderungen"]
+        trg_mods = studies[target]["ECTS_Anforderungen"]
+
+        for fach, needed in trg_mods.items():
+            have = src_mods.get(fach, 0)
+            if have < needed:
+                issues.append(f"Zu wenige ECTS in {fach} (haben {have}, benötigt {needed}).")
+
+    # === Entscheidung ableiten ===
+    if not issues:
         return ("Ja", "Alle formalen und fachlichen Kriterien erfüllt.")
-    elif len(ects_issues) <= 2:
-        return ("Unklar", "Einige ECTS-Kriterien unklar:\n- " + "\n- ".join(ects_issues))
+    elif len(issues) <= 2:
+        return ("Unklar", "Teilweise Abweichungen:\n- " + "\n- ".join(issues))
     else:
-        return ("Nein", "Fachliche Kriterien nicht erfüllt:\n- " + "\n- ".join(ects_issues))
+        return ("Nein", "Voraussetzungen nicht erfüllt:\n- " + "\n- ".join(issues))
+
+def evaluate_master_extern(applicant, rules):
+    """Prüft externe Bewerber anhand der Excel-Regeln (ohne Modulvergleich)."""
+    general = rules.get("Allgemein", {})
+    studies = rules.get("Studiengänge", {})
+    target = applicant.get("studiengang")
+
+    issues = []
+
+    # === Allgemeine Regeln wie oben ===
+    try:
+        note = float(applicant.get("abschlussnote", 5))
+        min_note = float(general.get("Mindestnote_Bachelor", 2.5))
+        if note > min_note:
+            issues.append(f"Abschlussnote ({note}) liegt über dem Grenzwert ({min_note}).")
+    except Exception:
+        issues.append("Ungültige Abschlussnote.")
+
+    try:
+        erf = int(applicant.get("berufserfahrung_jahre", 0))
+        min_erf = int(general.get("Berufserfahrung_Jahre", 1))
+        if erf < min_erf:
+            issues.append(f"Nur {erf} Jahre Berufserfahrung (erforderlich: {min_erf}).")
+    except Exception:
+        issues.append("Ungültige Berufserfahrung.")
+
+    # === ECTS-Minimum (aus Zielstudiengangsanforderungen) ===
+    if target in studies:
+        trg_mods = studies[target]["ECTS_Anforderungen"]
+        for fach, needed in trg_mods.items():
+            # externe geben keine Modulverteilung an → nur deklarativen Hinweis
+            issues.append(f"Nachweis von mindestens {needed} ECTS in {fach} erforderlich (Prüfung durch Prüfungsamt).")
+
+    if not issues:
+        return ("Ja", "Alle formalen Voraussetzungen erfüllt. Endgültige Prüfung durch Prüfungsamt.")
+    else:
+        return ("Unklar", "Erforderliche Unterlagen und Nachweise werden geprüft:\n- " + "\n- ".join(issues))

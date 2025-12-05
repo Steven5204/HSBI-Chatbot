@@ -28,6 +28,15 @@ questions = [
      "text": "Haben Sie Ihren Bachelor an der HSBI gemacht?",
      "options": ["Ja", "Nein"]},
 
+    {
+    "key": "bachelor_hsbi",
+    "depends_on": {"master_typ": "Ja"},
+    "text": "Welchen Bachelorstudiengang haben Sie an der HSBI abgeschlossen?",
+    "options": list(RULES.get("Studiengänge", {}).keys()) or [
+        "Digitale Technologien", "Maschinenbau", "Wirtschaftsingenieurwesen"
+        ]
+    }, 
+
     {"key": "studiengang", "depends_on": {"abschlussziel": "Master"},
      "text": "Für welchen Masterstudiengang interessieren Sie sich?",
      "options": list(RULES.get("Studiengänge", {}).keys()) or

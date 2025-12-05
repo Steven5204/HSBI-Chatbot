@@ -1,96 +1,73 @@
+# main.py
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from conversation import (
-    questions, update_state, get_next_question, get_ects_info, RULES
-)
-from matching import evaluate_bachelor, evaluate_master_intern, evaluate_master_extern
+from rules_excel import load_excel_rules
+from openai_client import get_openai_decision
+from conversation import update_state, get_next_question, questions
 from logging_handler import log_event
+from fastapi.middleware.cors import CORSMiddleware
 
-app = FastAPI(title="BIFI Studienberater Backend")
+app = FastAPI()
 
+# === CORS KONFIGURATION ===
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],          # oder: ["http://127.0.0.1:5500"] wenn du mit LiveServer arbeitest
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["*"],          # <--- hier erlauben wir auch OPTIONS!
     allow_headers=["*"],
 )
 
+RULES = load_excel_rules("zulassung.xlsx")
 SESSIONS = {}
 
+
 class ChatRequest(BaseModel):
-    message: str
     user_id: str
+    message: str
+
 
 @app.post("/chat")
 async def chat(request: ChatRequest):
     user_id = request.user_id
     user_input = request.message.strip()
+
     if user_id not in SESSIONS:
         SESSIONS[user_id] = {"state": {}, "progress": 0}
     state = SESSIONS[user_id]["state"]
 
+    # Eingabe speichern
     state = update_state(state, user_input)
-    
-    ects_info = get_ects_info(state, RULES)
-    if ects_info:
-        # 🔹 Info zuerst senden
-        info_text = ects_info
 
-        # 🔹 Danach direkt nächste Frage holen
-        question = get_next_question(state)
-        if question:
-            text = f"{info_text}\n\n{question['text']}"
-            options = question.get("options")
-            answered = len([k for k in state.keys() if k in [q["key"] for q in questions]])
-            total = len([
-                q for q in questions
-                if "depends_on" not in q or all(state.get(k) == v for k, v in q["depends_on"].items())
-            ])
-            progress = int((answered / total) * 100)
-            SESSIONS[user_id]["progress"] = progress
-            return {"response": text, "progress": progress, "options": options}
-        
-    question = get_next_question(state)
-    if question:
+    # Nächste Frage finden
+    next_question = get_next_question(state)
+
+    if next_question:
+        options = next_question.get("options")
         answered = len([k for k in state.keys() if k in [q["key"] for q in questions]])
-        total = len([
-            q for q in questions
-            if "depends_on" not in q or all(state.get(k) == v for k, v in q["depends_on"].items())
-        ])
+        total = len([q for q in questions if "depends_on" not in q or all(state.get(k) == v for k, v in q["depends_on"].items())])
         progress = int((answered / total) * 100)
         SESSIONS[user_id]["progress"] = progress
-        return {"response": question["text"], "progress": progress, "options": question.get("options")}
 
-    category = state.get("nutzerkategorie")
-    if category == "bachelor":
-        decision, explanation = evaluate_bachelor(state)
-    elif category == "master_intern":
-        decision, explanation = evaluate_master_intern(state, RULES["Allgemein"])
-    elif category == "master_extern":
-        program = state.get("studiengang")
-        rules = RULES["Studiengänge"].get(program, {}).get("ECTS_Anforderungen", {})
-        decision, explanation = evaluate_master_extern(state, rules, RULES["Allgemein"])
-    else:
-        decision, explanation = "Unklar", "Zu wenige Angaben."
+        return {
+            "response": next_question["text"],
+            "options": options,
+            "progress": progress
+        }
+
+    # Wenn keine weiteren Fragen mehr offen sind → OpenAI entscheidet
+    decision_data = get_openai_decision(state, RULES)
 
     log_event({
         "user_id": user_id,
-        "nutzerkategorie": category,
+        "entscheidung": decision_data["entscheidung"],
         "studiengang": state.get("studiengang"),
-        "abschlussziel": state.get("abschlussziel"),
-        "entscheidung": decision,
+        "nutzerkategorie": state.get("nutzerkategorie"),
         "completed": True
     })
-    SESSIONS.pop(user_id, None)
 
-    return {"response": f"📋 Entscheidung: {decision}\n\n{explanation}", "progress": 100, "options": None}
-
-@app.get("/")
-def home():
-    return {"status": "Bifi Backend läuft 🚀"}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=5000)
+    return {
+        "response": decision_data["formatted_response"],
+        "progress": 100,
+        "options": None
+    }
