@@ -1,3 +1,4 @@
+// === Globale Elemente ===
 const chatWindow = document.getElementById("chat-window");
 const inputField = document.getElementById("user-input");
 const sendBtn = document.getElementById("send-btn");
@@ -10,95 +11,99 @@ const progressText = document.getElementById("progress-text");
 let sessionId = crypto.randomUUID();
 let progress = 0;
 
-function appendMessage(sender, text, options = null) {
+// === Nachricht in den Chat schreiben ===
+function appendMessage(sender, text) {
   const msg = document.createElement("div");
   msg.classList.add("message", sender === "user" ? "user-msg" : "bot-msg");
   msg.innerHTML = text.replace(/\n/g, "<br>");
   chatWindow.appendChild(msg);
-
-  if (options && Array.isArray(options)) {
-    const buttonContainer = document.createElement("div");
-    buttonContainer.className = "button-container";
-    options.forEach(option => {
-      const btn = document.createElement("button");
-      btn.className = "option-button";
-      btn.textContent = option;
-      btn.onclick = () => {
-        sendMessage(option);
-        buttonContainer.remove();
-      };
-      buttonContainer.appendChild(btn);
-    });
-    chatWindow.appendChild(buttonContainer);
-  }
   chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
+// === Fortschritt aktualisieren ===
 function updateProgress(value) {
   progressBar.style.height = `${value}%`;
   progressText.innerHTML = `${value}%<br>Fortschritt`;
-  if (value >= 100) enableApplyButton();
 }
 
-function enableApplyButton() {
-  applyBtn.classList.remove("disabled");
-  applyBtn.classList.add("success");
-  applyBtn.disabled = false;
+// === Buttons anzeigen ===
+function showOptionButtons(options) {
+  if (!options || !Array.isArray(options)) return;
+  const buttonContainer = document.createElement("div");
+  buttonContainer.classList.add("button-container");
+
+  options.forEach((option) => {
+    const btn = document.createElement("button");
+    btn.classList.add("option-button");
+    btn.textContent = option;
+    btn.onclick = () => {
+      sendMessage(option);
+      buttonContainer.remove();
+    };
+    buttonContainer.appendChild(btn);
+  });
+
+  chatWindow.appendChild(buttonContainer);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
-function showHelp() {
-  alert("💡 Hilfe & FAQ\n\nIch begleite Sie Schritt für Schritt durch den Zulassungscheck für Masterstudiengänge der HSBI.\n\n👉 Klicken Sie auf START, um zu beginnen.\n👉 Wählen Sie aus den Vorschlägen oder geben Sie Ihre Antwort manuell ein.");
-}
-
-function showApplyPopup() {
-  alert("🎓 Sie erfüllen die Voraussetzungen!\n\nHier geht’s zur Bewerbung: https://www.hsbi.de/masterbewerbung");
-}
-
+// === Nachricht an Backend senden ===
 async function sendMessage(message) {
   appendMessage("user", message);
-  inputField.value = "";
-  appendMessage("bot", "💭 Einen Moment bitte...");
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/chat", {
+    const response = await fetch("http://127.0.0.1:5000/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, session_id: sessionId }),
+      body: JSON.stringify({ message, user_id: sessionId }),
     });
 
-    const data = await res.json();
-    const loading = document.querySelector(".bot-msg:last-child");
-    if (loading && loading.textContent.includes("Einen Moment")) loading.remove();
+    const data = await response.json();
 
-    if (data.ects_info) appendMessage("bot", data.ects_info);
+    if (data.response) {
+      appendMessage("bot", data.response);
 
-    if (data.type === "question") {
-      appendMessage("bot", data.text, data.options || null);
-      progress = Math.min(progress + 15, 100);
-      updateProgress(progress);
-    } else if (data.type === "decision") {
-      appendMessage("bot", `📋 <b>Ergebnis:</b> ${data.entscheidung}<br>${data.begruendung}`);
-      updateProgress(100);
-      enableApplyButton();
-    } else {
-      appendMessage("bot", "⚠️ Unerwartete Antwort vom Server.");
+      // 🔹 Wenn Optionen vorhanden → Buttons anzeigen
+      if (data.options && Array.isArray(data.options) && data.options.length > 0) {
+        showOptionButtons(data.options);
+      }
+
+      // 🔹 Fortschrittsanzeige aktualisieren
+      if (data.progress !== undefined) {
+        updateProgress(data.progress);
+      }
     }
   } catch (err) {
-    appendMessage("bot", "🚫 Fehler bei der Serververbindung. Bitte Backend starten!");
+    appendMessage("bot", "🚫 Fehler bei der Serververbindung.");
     console.error(err);
   }
 }
 
+// === Buttons ===
 startBtn.addEventListener("click", () => {
   chatWindow.innerHTML = "";
   progress = 0;
   updateProgress(0);
   appendMessage("bot", "Willkommen! Ich bin Bifi 👋 – dein Studienberater. Für welchen Abschluss interessierst du dich?");
+  // 🔹 Zeige direkt die erste Frage-Optionen
+  showOptionButtons(["Bachelor", "Master"]);
 });
 
 sendBtn.addEventListener("click", () => {
-  if (inputField.value.trim() !== "") sendMessage(inputField.value.trim());
+  const msg = inputField.value.trim();
+  if (msg) {
+    sendMessage(msg);
+    inputField.value = "";
+  }
 });
 
-helpBtn.addEventListener("click", showHelp);
-applyBtn.addEventListener("click", showApplyPopup);
+helpBtn.addEventListener("click", () => {
+  appendMessage(
+    "bot",
+    "💡 Hilfe & FAQ:<br>Ich begleite dich Schritt für Schritt durch den Zulassungscheck.<br>Drücke <b>Start</b>, um zu beginnen."
+  );
+});
+
+applyBtn.addEventListener("click", () => {
+  window.open("https://www.hsbi.de/masterbewerbung", "_blank");
+});
