@@ -8,50 +8,80 @@ except Exception as e:
     RULES = {"Studiengänge": {}, "Allgemein": {}}
 
 questions = [
-    {"key": "abschlussziel", "text": "Für welchen Abschluss interessieren Sie sich?",
-     "options": ["Bachelor", "Master"]},
-
-    {"key": "hochschulzugang", "depends_on": {"abschlussziel": "Bachelor"},
-     "text": "Welche Hochschulzugangsberechtigung haben Sie?",
-     "options": [
-         "Allgemeine Hochschulreife",
-         "Fachhochschulreife",
-         "Fachgebundene Hochschulreife",
-         "Berufliche Qualifizierung",
-         "Ausländische Hochschulzugangsberechtigung"
-     ]},
-
-    {"key": "bachelor_hinweis", "depends_on": {"abschlussziel": "Bachelor"},
-     "text": "Danke! Ich prüfe Ihren Zugang basierend auf Ihrer Hochschulzugangsberechtigung."},
-
-    {"key": "master_typ", "depends_on": {"abschlussziel": "Master"},
-     "text": "Haben Sie Ihren Bachelor an der HSBI gemacht?",
-     "options": ["Ja", "Nein"]},
+    {
+        "key": "abschlussziel",
+        "text": "Für welchen Abschluss interessieren Sie sich?",
+        "options": ["Bachelor", "Master"]
+    },
 
     {
-    "key": "bachelor_hsbi",
-    "depends_on": {"master_typ": "Ja"},
-    "text": "Welchen Bachelorstudiengang haben Sie an der HSBI abgeschlossen?",
-    "options": list(RULES.get("Studiengänge", {}).keys()) or [
-        "Digitale Technologien", "Maschinenbau", "Wirtschaftsingenieurwesen"
-        ]
-    }, 
+        "key": "hochschulzugang",
+        "text": "Besitzen Sie eine Hochschulzugangsberechtigung (z. B. Abitur, Fachabitur oder eine berufliche Qualifikation)?",
+        "options": ["Ja", "Nein"],
+        "depends_on": {"abschlussziel": "Bachelor"}
+    },
 
-    {"key": "studiengang", "depends_on": {"abschlussziel": "Master"},
-     "text": "Für welchen Masterstudiengang interessieren Sie sich?",
-     "options": list(RULES.get("Studiengänge", {}).keys()) or
-                ["Angewandte Automatisierung", "Digitale Technologien", "Wirtschaftsingenieurwesen", "Maschinenbau"]},
-
-    {"key": "abschlussnote", "depends_on": {"abschlussziel": "Master"},
-     "text": "Welche Abschlussnote haben Sie im Bachelor?"},
-
-    {"key": "berufserfahrung_jahre", "depends_on": {"abschlussziel": "Master"},
-     "text": "Wie viele Jahre Berufserfahrung haben Sie nach Ihrem Bachelor gesammelt?"},
-
-    {"key": "englischkenntnisse", "depends_on": {"abschlussziel": "Master"},
-     "text": "Wie beurteilen Sie Ihre technischen Englischkenntnisse?",
-     "options": ["Sehr gut", "Gut", "Befriedigend", "Ausreichend", "Mangelhaft"]}
+    {
+        "key": "hsbi_bachelor",
+        "text": "Haben Sie Ihren Bachelor an der HSBI gemacht?",
+        "options": ["Ja", "Nein"],
+        "depends_on": {"abschlussziel": "Master"}
+    },
+    {
+        "key": "bachelorstudiengang",
+        "text": "Welchen Bachelorstudiengang haben Sie an der HSBI abgeschlossen?",
+        "options": [
+            "Digitale Technologien",
+            "Informatik",
+            "Maschinenbau",
+            "Elektrotechnik",
+            "Wirtschaftsingenieurwesen"
+        ],
+        "depends_on": {"hsbi_bachelor": "Ja"}
+    },
+    {
+        "key": "bachelorstudiengang",
+        "text": "Welchen Bachelorstudiengang haben Sie abgeschlossen?",
+        "options": [
+            "Informatik",
+            "Elektrotechnik",
+            "Maschinenbau",
+            "Wirtschaftsinformatik",
+            "Digitale Technologien"
+        ],
+        "depends_on": {"hsbi_bachelor": "Nein"}
+    },
+    {
+        "key": "studiengang",
+        "text": "Für welchen Masterstudiengang interessieren Sie sich?",
+        "options": [
+            "Angewandte Automatisierung",
+            "Digitale Technologien",
+            "Maschinenbau",
+            "Wirtschaftsingenieurwesen",
+            "Elektrotechnik"
+        ],
+        "depends_on": {"abschlussziel": "Master"}
+    },
+    {
+        "key": "abschlussnote",
+        "text": "Welche Abschlussnote haben Sie im Bachelor?",
+        "depends_on": {"abschlussziel": "Master"}
+    },
+    {
+        "key": "berufserfahrung",
+        "text": "Wie viele Jahre Berufserfahrung haben Sie nach Ihrem Bachelor gesammelt?",
+        "depends_on": {"abschlussziel": "Master"}
+    },
+    {
+        "key": "englischkenntnisse",
+        "text": "Besitzen Sie Englischkenntnisse auf mindestens B2-Niveau?",
+        "options": ["Ja", "Nein"],
+        "depends_on": {"abschlussziel": "Master"}
+    }
 ]
+
+
 
 def get_ects_info(state, rules):
     if "studiengang" not in state or state.get("ects_info_shown"):
@@ -66,12 +96,33 @@ def get_ects_info(state, rules):
     return f"ℹ️ Für den Studiengang **{program}** gelten folgende Anforderungen:\n{ects_info}"
 
 def get_next_question(state):
-    for q in questions:
-        if "depends_on" in q:
-            if any(state.get(k) != v for k, v in q["depends_on"].items()):
-                continue
-        if q["key"] not in state:
-            return q
+    """
+    Gibt die nächste passende Frage basierend auf dem aktuellen Gesprächsstatus zurück.
+    """
+    # Wenn Abschlussziel noch nicht gewählt → zuerst danach fragen
+    if "abschlussziel" not in state:
+        return {
+            "id": "abschlussziel",
+            "text": "Für welchen Abschluss interessieren Sie sich?",
+            "options": ["Bachelor", "Master"]
+        }
+
+    # 🟦 Wenn Bachelor → frage nach Hochschulzugangsberechtigung
+    if state["abschlussziel"].lower() == "bachelor" and "hochschulzugang" not in state:
+        return {
+            "id": "hochschulzugang",
+            "text": "Besitzen Sie eine Hochschulzugangsberechtigung (z. B. Abitur, Fachabitur oder eine berufliche Qualifikation)?",
+            "options": ["Ja", "Nein"]
+        }
+
+    # 🟨 Wenn Master → führe bisherigen Fragefluss aus
+    if state["abschlussziel"].lower() == "master":
+        # z. B. Fragen wie hsbi_bachelor, bachelorstudiengang, studiengang usw.
+        for q in questions:
+            if q["id"] not in state:
+                return q
+
+    # Wenn alle Fragen beantwortet → keine mehr
     return None
 
 def update_state(state, user_input):

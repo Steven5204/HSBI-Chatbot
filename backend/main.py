@@ -1,73 +1,87 @@
-# main.py
-from fastapi import FastAPI
-from pydantic import BaseModel
-from rules_excel import load_excel_rules
-from openai_client import get_openai_decision
-from conversation import update_state, get_next_question, questions
-from logging_handler import log_event
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from conversation import get_next_question, update_state, questions
+from openai_client import get_openai_decision
+from rules_excel import load_excel_rules
 
+
+
+import uuid
+
+# === App-Setup ===
 app = FastAPI()
+RULES = load_excel_rules()
+SESSIONS = {}
 
-# === CORS KONFIGURATION ===
+# === CORS für Frontend erlauben ===
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # oder: ["http://127.0.0.1:5500"] wenn du mit LiveServer arbeitest
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],          # <--- hier erlauben wir auch OPTIONS!
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
-RULES = load_excel_rules("zulassung.xlsx")
-SESSIONS = {}
+# === Fortschritt berechnen ===
+def calculate_progress(state: dict) -> int:
+    """Berechnet Fortschritt in Prozent anhand der beantworteten Fragen."""
+    total_questions = len(questions)
+    answered = len([key for key in state.keys() if state[key]])
+    if total_questions == 0:
+        return 0
+    progress = int((answered / total_questions) * 100)
+    return min(progress, 100)
 
-
-class ChatRequest(BaseModel):
-    user_id: str
-    message: str
-
-
+# === Chat-Route ===
 @app.post("/chat")
-async def chat(request: ChatRequest):
-    user_id = request.user_id
-    user_input = request.message.strip()
+async def chat(request: Request):
+    data = await request.json()
+    message = data.get("message", "").strip()
+    user_id = data.get("user_id", str(uuid.uuid4()))
 
-    if user_id not in SESSIONS:
-        SESSIONS[user_id] = {"state": {}, "progress": 0}
-    state = SESSIONS[user_id]["state"]
+    # Lade Session-Zustand oder erzeuge neuen
+    state = SESSIONS.get(user_id, {})
 
-    # Eingabe speichern
-    state = update_state(state, user_input)
+    # === Sicherstellen, dass state ein dict ist ===
+    if not isinstance(state, dict):
+        state = {}
 
-    # Nächste Frage finden
-    next_question = get_next_question(state)
+    # === Update State ===
+    state = update_state(state, message)
+    SESSIONS[user_id] = state
 
-    if next_question:
-        options = next_question.get("options")
-        answered = len([k for k in state.keys() if k in [q["key"] for q in questions]])
-        total = len([q for q in questions if "depends_on" not in q or all(state.get(k) == v for k, v in q["depends_on"].items())])
-        progress = int((answered / total) * 100)
-        SESSIONS[user_id]["progress"] = progress
+    # === Nächste Frage bestimmen ===
+    next_q = get_next_question(state)
+
+    # === Falls noch Fragen offen sind ===
+    if next_q:
+        response_text = next_q["text"]
+        options = next_q.get("options", [])
+        progress = calculate_progress(state)
 
         return {
-            "response": next_question["text"],
+            "response": response_text,
             "options": options,
             "progress": progress
         }
 
-    # Wenn keine weiteren Fragen mehr offen sind → OpenAI entscheidet
-    decision_data = get_openai_decision(state, RULES)
+    # === Wenn alle Fragen beantwortet sind → GPT Entscheidung ===
+    try:
+        decision_data = get_openai_decision(state, RULES)
+        return {
+            "response": decision_data["formatted_response"],
+            "options": [],
+            "progress": 100
+        }
+    except Exception as e:
+        return {
+            "response": f"❌ Fehler bei der Entscheidungsanalyse: {e}",
+            "options": [],
+            "progress": 100
+        }
 
-    log_event({
-        "user_id": user_id,
-        "entscheidung": decision_data["entscheidung"],
-        "studiengang": state.get("studiengang"),
-        "nutzerkategorie": state.get("nutzerkategorie"),
-        "completed": True
-    })
+# === Startseite-Test ===
+@app.get("/")
+def root():
+    return {"message": "HSBI Chatbot Backend läuft ✅"}
 
-    return {
-        "response": decision_data["formatted_response"],
-        "progress": 100,
-        "options": None
-    }

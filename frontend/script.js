@@ -27,8 +27,10 @@ function updateProgress(value) {
 }
 
 // === Buttons anzeigen ===
+// ✅ Überarbeitete Version mit sauberem Verhalten für Ja/Nein & Mehrfachoptionen
 function showOptionButtons(options) {
-  if (!options || !Array.isArray(options)) return;
+  if (!options || !Array.isArray(options) || options.length === 0) return;
+
   const buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-container");
 
@@ -36,10 +38,17 @@ function showOptionButtons(options) {
     const btn = document.createElement("button");
     btn.classList.add("option-button");
     btn.textContent = option;
+
+    // 🧩 NEU: barrierefreie Attribute für bessere UX
+    btn.setAttribute("aria-label", `Antwort: ${option}`);
+    btn.setAttribute("role", "button");
+
+    // 🧩 Wenn Button geklickt → Antwort senden & Buttons ausblenden
     btn.onclick = () => {
       sendMessage(option);
-      buttonContainer.remove();
+      buttonContainer.remove(); // Buttons nach Auswahl entfernen
     };
+
     buttonContainer.appendChild(btn);
   });
 
@@ -63,7 +72,7 @@ async function sendMessage(message) {
     if (data.response) {
       appendMessage("bot", data.response);
 
-      // 🔹 Wenn Optionen vorhanden → Buttons anzeigen
+      // ✅ Wenn Optionen vorhanden → Buttons anzeigen (z. B. Ja/Nein bei Englischkenntnissen)
       if (data.options && Array.isArray(data.options) && data.options.length > 0) {
         showOptionButtons(data.options);
       }
@@ -84,8 +93,12 @@ startBtn.addEventListener("click", () => {
   chatWindow.innerHTML = "";
   progress = 0;
   updateProgress(0);
-  appendMessage("bot", "Willkommen! Ich bin Bifi 👋 – dein Studienberater. Für welchen Abschluss interessierst du dich?");
-  // 🔹 Zeige direkt die erste Frage-Optionen
+  appendMessage(
+    "bot",
+    "Willkommen! Ich bin Bifi 👋 – dein Studienberater. Für welchen Abschluss interessierst du dich?"
+  );
+
+  // ✅ Zeige direkt erste Antwortmöglichkeiten
   showOptionButtons(["Bachelor", "Master"]);
 });
 

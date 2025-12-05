@@ -2,119 +2,171 @@ from openai import OpenAI
 import os
 import json
 import re
+import difflib
 from dotenv import load_dotenv
+import re
+
 
 load_dotenv()
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-
-def get_openai_decision(applicant_data, rules):
+def format_markdown_response(raw_text: str) -> str:
     """
-    GPT bewertet den Bewerber anhand der Excel-Daten.
-    Gibt Entscheidung, Begründung, ECTS-Vergleich und Checkliste formatiert zurück.
+    Formatiert eine von GPT generierte Markdown-Antwort in HTML,
+    damit sie im Chat sauber dargestellt wird.
     """
-    prompt = f"""
-    Du bist ein sachlicher, deutschsprachiger Studienberater der Hochschule Bielefeld (HSBI).
-    Analysiere die Bewerberdaten und vergleiche sie mit dem Regelwerk aus der Excel-Datei.
-    Antworte ausschließlich auf Deutsch.
+    if not raw_text:
+        return "Keine Entscheidung verfügbar."
 
-    ### Bewerberdaten:
-    {json.dumps(applicant_data, ensure_ascii=False, indent=2)}
+    text = raw_text.strip()
 
-    ### Regelwerk (aus Excel):
-    {json.dumps(rules, ensure_ascii=False, indent=2)}
+    # Ersetze spezielle Bereiche mit Icons und HTML-Struktur
+    replacements = {
+        r"- \*\*Entscheidung:\*\*": "✅ <b>Entscheidung:</b>",
+        r"- \*\*Begründung:\*\*": "🧠 <b>Begründung:</b>",
+        r"- \*\*ECTS-Vergleich:\*\*": "📊 <b>ECTS-Vergleich:</b>",
+        r"- \*\*Bewertung:\*\*": "💡 <b>Bewertung:</b>",
+        r"- \*\*Weitere Voraussetzungen:\*\*": "📋 <b>Weitere Voraussetzungen:</b>",
+        r"- \*\*Bewerbungsunterlagen:\*\*": "📎 <b>Bewerbungsunterlagen:</b>",
+        r"- \*\*Soll:\*\*": "<u>Soll:</u>",
+        r"- \*\*Ist:\*\*": "<u>Ist:</u>",
+    }
 
-    ---
-    **Aufgabe:**
-    1. Vergleiche die vorhandenen ECTS-Leistungen des Bewerbers mit den geforderten Werten aus der Excel-Datei.
-       - Zeige für jeden Fachbereich (z. B. Mathematik, Informatik, Technik etc.) den Soll- und Ist-Wert.
-       - Bewerte jeden Punkt mit "✅ Erfüllt", "⚠️ Unklar" oder "❌ Nicht erfüllt".
-    2. Gib zusätzlich an, welche allgemeinen Voraussetzungen erfüllt sind (Note, Berufserfahrung, Englischkenntnisse etc.).
-    3. Erkläre kurz, ob die Person zugelassen werden kann ("Ja", "Nein", "Unklar").
-    4. Gib am Ende eine Beschreibung der einzureichenden Bewerbungsunterlagen.
-    5. Antworte ausschließlich im folgenden JSON-Format:
+    for pattern, replacement in replacements.items():
+        text = re.sub(pattern, replacement, text)
 
-    {{
-      "entscheidung": "Ja" | "Nein" | "Unklar",
-      "begruendung": "string",
-      "ects_vergleich": [
-        {{
-          "fachbereich": "string",
-          "gefordert": number,
-          "vorhanden": number,
-          "bewertung": "✅ Erfüllt" | "⚠️ Unklar" | "❌ Nicht erfüllt"
-        }}
-      ],
-      "weitere_voraussetzungen": [
-        "string"
-      ],
-      "checkliste": "string"
-    }}
+    # Normale Listenpunkte hübsch einrücken
+    text = re.sub(r"^- ", "• ", text, flags=re.MULTILINE)
+
+    # Zeilenumbrüche in <br> umwandeln
+    text = text.replace("\n", "<br>")
+
+    # Schönes Box-Layout für Chat
+    formatted = f"""
+    <div style='background-color:#f1f6ff;padding:12px;border-radius:10px;line-height:1.6;font-size:15px;'>
+        {text}
+    </div>
     """
 
+    return formatted
+
+
+def get_openai_decision(applicant_data: dict, rules: dict):
+    """
+    Übergibt die gesammelten Bewerberdaten und Studienregeln an OpenAI,
+    um automatisch zu prüfen, ob die Voraussetzungen erfüllt sind.
+    Für Bachelorbewerber: nur HZB-Prüfung.
+    Für Masterbewerber: vollständige ECTS- und Regelprüfung.
+    """
     try:
-        response = client.chat.completions.create(
-            model="gpt-4-turbo",
-            messages=[
-                {"role": "system", "content": "Du bist ein präziser, deutscher Studienberater der HSBI."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.3,
-        )
+        # 🔹 Sicherstellen, dass applicant_data ein dict ist
+        if not isinstance(applicant_data, dict):
+            applicant_data = {}
 
-        text = response.choices[0].message.content.strip()
+        # 🔹 Nutzerkategorie automatisch bestimmen
+        hsbi_status = (applicant_data.get("hsbi_bachelor") or "").strip().lower()
+        nutzerkategorie = "intern" if hsbi_status == "ja" else "extern"
 
-        # 🔍 JSON erkennen und parsen
-        match = re.search(r"\{.*\}", text, re.DOTALL)
-        if match:
-            json_text = match.group(0)
-            result = json.loads(json_text)
+        # 🔹 Abschlussziel, HZB und Studiengänge extrahieren
+        abschlussziel = (applicant_data.get("abschlussziel") or "").strip().lower()
+        hochschulzugang = (applicant_data.get("hochschulzugang") or "").strip().lower()
+        bachelorstudiengang = applicant_data.get("bachelorstudiengang", "Unbekannt")
+        masterstudiengang = applicant_data.get("studiengang", "Unbekannt")
+
+        # 🔹 GPT System Prompt
+        system_prompt = """
+        Du bist ein digitaler Studienberater der Hochschule Bielefeld (HSBI).
+        Analysiere die Bewerberdaten und prüfe anhand der gegebenen Informationen, 
+        ob die Zulassungsvoraussetzungen erfüllt sind.
+        Formatiere das Ergebnis klar im Markdown-Format:
+        - **Entscheidung:** Ja/Nein/Unklar
+        - **Begründung:** Warum oder warum nicht
+        - **Weitere Voraussetzungen:** ggf. ergänzende Anforderungen
+        - **Bewerbungsunterlagen:** Welche Unterlagen sind erforderlich
+        """
+
+        # 🔹 Unterschiedliche Logik: Bachelor vs Master
+        if "bachelor" in abschlussziel:
+            if hochschulzugang == "ja":
+                formatted_output = format_markdown_response("""
+                - **Entscheidung:** Ja  
+                - **Begründung:** Der Bewerber besitzt eine anerkannte Hochschulzugangsberechtigung (z. B. Abitur, Fachabitur oder berufliche Qualifikation) und erfüllt damit die formalen Voraussetzungen für ein Bachelorstudium an der HSBI.  
+                - **Bewerbungsunterlagen:** Abschlusszeugnis, Lebenslauf, ggf. Nachweis über berufliche Qualifikation.
+                """)
+                return {"formatted_response": formatted_output}
+
+            elif hochschulzugang == "nein":
+                formatted_output = format_markdown_response("""
+                - **Entscheidung:** Nein  
+                - **Begründung:** Es liegt keine Hochschulzugangsberechtigung vor. Eine Zulassung zum Bachelorstudium ist daher nicht möglich.  
+                - **Bewerbungsunterlagen:** Keine – bitte wenden Sie sich an die Studienberatung für alternative Zugangswege.
+                """)
+                return {"formatted_response": formatted_output}
+            
+            # 🟦 Bachelorbewerber → Nur HZB-Prüfung
+            user_prompt = f"""
+            Der Bewerber möchte einen Bachelorstudiengang beginnen.
+            Prüfe, ob eine Hochschulzugangsberechtigung (z. B. Abitur, Fachabitur, berufliche Qualifikation) vorliegt.
+
+            Bewerberdaten:
+            {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
+
+            Antworte klar im Markdown-Format:
+            - **Entscheidung:** Ja/Nein
+            - **Begründung:** Warum oder warum nicht
+            - **Weitere Voraussetzungen:** ggf. ergänzende Anforderungen (z. B. Sprachkenntnisse)
+            - **Bewerbungsunterlagen:** Welche Dokumente müssen eingereicht werden (z. B. Zeugnisse, Lebenslauf)
+            """
         else:
-            result = {
-                "entscheidung": "Unklar",
-                "begruendung": text,
-                "ects_vergleich": [],
-                "weitere_voraussetzungen": [],
-                "checkliste": "Keine formatierten Daten erkannt."
-            }
+            # 🟨 Masterbewerber → Vollständige Logik mit ECTS
+            user_prompt = f"""
+            Bewerberdaten:
+            {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
 
-        # 🔹 Formatierung des ECTS-Vergleichs
-        ects_lines = []
-        for e in result.get("ects_vergleich", []):
-            ects_lines.append(
-                f"{e['fachbereich']}: {e['vorhanden']} / {e['gefordert']} ECTS → {e['bewertung']}"
-            )
+            Studienregeln (aus Excel):
+            {json.dumps(rules, indent=2, ensure_ascii=False)}
 
-        weitere_voraussetzungen = "\n".join(
-            [f"✅ {v}" for v in result.get("weitere_voraussetzungen", [])]
+            Bewerberstatus: {nutzerkategorie.upper()}
+            Bachelorstudiengang: {bachelorstudiengang}
+            Angestrebter Masterstudiengang: {masterstudiengang}
+
+            Wenn der Bewerber extern ist, weise darauf hin,
+            dass die ECTS-Anrechnung durch das Prüfungsamt geprüft werden muss.
+
+            Antworte im Markdown-Format:
+            - **Entscheidung:** Ja/Nein/Unklar
+            - **Begründung:** Warum oder warum nicht
+            - **ECTS-Vergleich:** Falls relevant, liste Soll/Ist und Bewertung auf
+            - **Weitere Voraussetzungen:** Note, Berufserfahrung, Englischkenntnisse
+            - **Bewerbungsunterlagen:** Welche Unterlagen sind erforderlich
+            """
+
+        # 🔹 GPT-Aufruf
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=0.2
         )
 
-        formatted_response = (
-            f"📋 **Entscheidung:** {result.get('entscheidung', 'Unklar')}\n\n"
-            f"**Begründung:**\n{result.get('begruendung', '').strip()}\n\n"
-            f"**📊 ECTS-Vergleich:**\n" +
-            ("\n".join(ects_lines) if ects_lines else "– Keine Daten –") +
-            "\n\n**Weitere Voraussetzungen:**\n" +
-            (weitere_voraussetzungen or "– Keine Angaben –") +
-            "\n\n**Bewerbungsunterlagen:**\n" +
-            result.get("checkliste", "")
-        )
+        # 🔹 Antwort verarbeiten
+        decision_text = ""
+        if hasattr(response, "choices") and len(response.choices) > 0:
+            decision_text = response.choices[0].message.content.strip()
+
+        # 🔹 Formatieren oder Fallback
+        if not decision_text:
+            formatted_output = "⚠️ Keine Antwort vom Entscheidungsmodul erhalten."
+        else:
+            formatted_output = format_markdown_response(decision_text)
 
         return {
-            "entscheidung": result.get("entscheidung", "Unklar"),
-            "begruendung": result.get("begruendung", ""),
-            "ects_vergleich": result.get("ects_vergleich", []),
-            "weitere_voraussetzungen": result.get("weitere_voraussetzungen", []),
-            "checkliste": result.get("checkliste", ""),
-            "formatted_response": formatted_response
+            "formatted_response": formatted_output
         }
 
     except Exception as e:
         return {
-            "entscheidung": "Fehler",
-            "begruendung": f"API-Fehler: {e}",
-            "ects_vergleich": [],
-            "weitere_voraussetzungen": [],
-            "checkliste": "Keine Entscheidung möglich.",
-            "formatted_response": f"❌ Fehler bei der Entscheidung: {e}"
+            "formatted_response": f"❌ Fehler bei der Entscheidungsanalyse: {str(e)}"
         }
