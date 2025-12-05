@@ -32,10 +32,26 @@ async def chat(request: ChatRequest):
     state = SESSIONS[user_id]["state"]
 
     state = update_state(state, user_input)
+    
     ects_info = get_ects_info(state, RULES)
     if ects_info:
-        return {"response": ects_info, "progress": SESSIONS[user_id]["progress"], "options": None}
+        # 🔹 Info zuerst senden
+        info_text = ects_info
 
+        # 🔹 Danach direkt nächste Frage holen
+        question = get_next_question(state)
+        if question:
+            text = f"{info_text}\n\n{question['text']}"
+            options = question.get("options")
+            answered = len([k for k in state.keys() if k in [q["key"] for q in questions]])
+            total = len([
+                q for q in questions
+                if "depends_on" not in q or all(state.get(k) == v for k, v in q["depends_on"].items())
+            ])
+            progress = int((answered / total) * 100)
+            SESSIONS[user_id]["progress"] = progress
+            return {"response": text, "progress": progress, "options": options}
+        
     question = get_next_question(state)
     if question:
         answered = len([k for k in state.keys() if k in [q["key"] for q in questions]])
