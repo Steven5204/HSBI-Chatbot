@@ -22,12 +22,12 @@ def format_markdown_response(raw_text: str) -> str:
 
     # Ersetze spezielle Bereiche mit Icons und HTML-Struktur
     replacements = {
-        r"- \*\*Entscheidung:\*\*": "✅ <b>Entscheidung:</b>",
-        r"- \*\*Begründung:\*\*": "🧠 <b>Begründung:</b>",
-        r"- \*\*ECTS-Vergleich:\*\*": "📊 <b>ECTS-Vergleich:</b>",
-        r"- \*\*Bewertung:\*\*": "💡 <b>Bewertung:</b>",
-        r"- \*\*Weitere Voraussetzungen:\*\*": "📋 <b>Weitere Voraussetzungen:</b>",
-        r"- \*\*Bewerbungsunterlagen:\*\*": "📎 <b>Bewerbungsunterlagen:</b>",
+        r"- \*\*Entscheidung:\*\*": " <b>Entscheidung:</b>",
+        r"- \*\*Begründung:\*\*": " <b>Begründung:</b>",
+        r"- \*\*ECTS-Vergleich:\*\*": " <b>ECTS-Vergleich:</b>",
+        r"- \*\*Bewertung:\*\*": " <b>Bewertung:</b>",
+        r"- \*\*Weitere Voraussetzungen:\*\*": " <b>Weitere Voraussetzungen:</b>",
+        r"- \*\*Bewerbungsunterlagen:\*\*": " <b>Bewerbungsunterlagen:</b>",
         r"- \*\*Soll:\*\*": "<u>Soll:</u>",
         r"- \*\*Ist:\*\*": "<u>Ist:</u>",
     }
@@ -75,14 +75,18 @@ def get_openai_decision(applicant_data: dict, rules: dict):
 
         # 🔹 GPT System Prompt
         system_prompt = """
-        Du bist ein digitaler Studienberater der Hochschule Bielefeld (HSBI).
+        Du bist Bifi, der digitale Studienberater der Hochschule Bielefeld (HSBI).
+        Sprich den Nutzer stets direkt mit „du“ oder „deine“ an – nicht in der dritten Person.
         Analysiere die Bewerberdaten und prüfe anhand der gegebenen Informationen, 
         ob die Zulassungsvoraussetzungen erfüllt sind.
-        Formatiere das Ergebnis klar im Markdown-Format:
-        - **Entscheidung:** Ja/Nein/Unklar
+        Formuliere klar, freundlich und verständlich im Markdown-Format, **ohne Emojis oder Symbole**.
+
+        Das Format deiner Antwort:
+        - **Entscheidung:** Ja / Nein / Unklar
         - **Begründung:** Warum oder warum nicht
-        - **Weitere Voraussetzungen:** ggf. ergänzende Anforderungen
-        - **Bewerbungsunterlagen:** Welche Unterlagen sind erforderlich
+        - **ECTS-Vergleich:** Falls relevant, liste Soll/Ist im direkten Vergelich und Bewertung auf
+        - **Weitere Voraussetzungen:** Note, Berufserfahrung, Englischkenntnisse
+        - **Bewerbungsunterlagen:** Welche Unterlagen du einreichen musst
         """
 
         # 🔹 Unterschiedliche Logik: Bachelor vs Master
