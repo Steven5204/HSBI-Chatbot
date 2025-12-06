@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <title>HSBI Chatbot – Statistik</title>
+  <title>HSBI Chatbot – Statistik Dashboard</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     body {
@@ -10,41 +10,115 @@
       background: #f5f7fb;
       margin: 0;
       padding: 2rem;
+      color: #1a1a1a;
     }
+
+    /* Titelbereich mit Maskottchen */
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .header img {
+      height: 60px;
+      width: 60px;
+    }
+
     h1 {
-      text-align: center;
       color: #004aad;
+      font-size: 1.9rem;
+      margin: 0;
     }
+
+    /* Kennzahlenkarten */
     .metrics {
       display: flex;
       justify-content: center;
       gap: 2rem;
-      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.8rem;
     }
+
     .card {
       background: white;
-      padding: 1rem 2rem;
+      padding: 1.2rem 2rem;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
       min-width: 180px;
+      transition: transform 0.2s ease;
     }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
     .card h2 {
-      margin: 0.2rem;
+      margin: 0.3rem;
       color: #004aad;
+      font-size: 1.9rem;
     }
-    canvas {
+
+    .card p {
+      margin: 0;
+      color: #555;
+      font-weight: 500;
+    }
+
+    /* Charts nebeneinander */
+    .dashboard {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .chart-card {
       background: white;
-      padding: 1rem;
+      padding: 1rem 1.2rem;
       border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      max-width: 640px;
+      min-width: 400px;
+      height: 420px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .chart-card h3 {
+      margin-bottom: 0.7rem;
+      color: #004aad;
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    canvas {
+      flex-grow: 1;
+      max-height: 320px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2.5rem;
+      color: #777;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <h1>📊 HSBI Chatbot Statistik</h1>
+  <!-- 🦊 Kopfbereich mit Maskottchen -->
+  <div class="header">
+    <img src="fox.png" alt="HSBI Maskottchen" />
+    <h1>HSBI Chatbot Statistik Dashboard</h1>
+  </div>
 
+  <!-- Kennzahlen -->
   <div class="metrics">
     <div class="card">
       <h2 id="users">0</h2>
@@ -56,82 +130,77 @@
     </div>
     <div class="card">
       <h2 id="days">0</h2>
-      <p>Tage</p>
+      <p>Zeitraum (Tage)</p>
     </div>
   </div>
 
-  <canvas id="programsChart" width="400" height="200"></canvas>
-  <canvas id="mastersChart" width="400" height="200"></canvas>
-  <canvas id="categoryChart" width="400" height="200"></canvas>
+  <!-- Charts -->
+  <div class="dashboard">
+    <div class="chart-card">
+      <h3>Beliebteste Masterstudiengänge</h3>
+      <canvas id="programsChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>Nutzerkategorien</h3>
+      <canvas id="categoryChart"></canvas>
+    </div>
+  </div>
+
+  <footer>© Hochschule Bielefeld – BIFI Chatbot Analytics</footer>
 
   <script>
     async function loadReport() {
-        
-       const baseUrl = window.location.origin.includes("localhost")
+      const baseUrl = window.location.origin.includes("localhost")
         ? "http://127.0.0.1:5000"
         : window.location.origin;
 
-
-      const response = await fetch(`${baseUrl}/report`); 
+      const response = await fetch(`${baseUrl}/report`);
       const data = await response.json();
 
-      // 🧩 Karten aktualisieren
+      // Zahlen aktualisieren
       document.getElementById("users").innerText = data.anzahl_nutzer;
       document.getElementById("success").innerText = data.erfolgreiche_bewerbungen;
       document.getElementById("days").innerText = data.zeitraum_tage;
 
-      // 📊 Beliebteste Studiengänge
-      const ctxPrograms = document.getElementById("programsChart");
-      new Chart(ctxPrograms, {
+      // Studiengänge
+      new Chart(document.getElementById("programsChart"), {
         type: "bar",
         data: {
           labels: data.beliebteste_studiengänge.map(i => i[0]),
           datasets: [{
-            label: "Studiengänge",
+            label: "Anfragen",
             data: data.beliebteste_studiengänge.map(i => i[1]),
-            borderWidth: 1
+            backgroundColor: "#004aad"
           }]
         },
         options: {
-          plugins: { title: { display: true, text: "Beliebteste Studiengänge" } },
-          scales: { y: { beginAtZero: true } }
+          plugins: { legend: { display: false } },
+          scales: {
+            y: { beginAtZero: true, title: { display: true, text: "Anfragen" } },
+            x: { title: { display: true, text: "Studiengänge" } }
+          },
+          responsive: true,
+          maintainAspectRatio: false
         }
       });
 
-      // 📈 Beliebteste Masterstudiengänge
-      const ctxMasters = document.getElementById("mastersChart");
-      new Chart(ctxMasters, {
-        type: "bar",
-        data: {
-          labels: data.beliebteste_masterstudiengänge.map(i => i[0]),
-          datasets: [{
-            label: "Masterstudiengänge",
-            data: data.beliebteste_masterstudiengänge.map(i => i[1]),
-            borderWidth: 1
-          }]
-        },
-        options: {
-          plugins: { title: { display: true, text: "Beliebteste Masterstudiengänge" } },
-          scales: { y: { beginAtZero: true } }
-        }
-      });
-
-      // 🥧 Nutzerkategorien
-      const ctxCategories = document.getElementById("categoryChart");
+      // Nutzerkategorien
       const categories = Object.keys(data.nutzertypen);
       const counts = Object.values(data.nutzertypen);
-
-      new Chart(ctxCategories, {
+      new Chart(document.getElementById("categoryChart"), {
         type: "pie",
         data: {
           labels: categories,
           datasets: [{
-            label: "Nutzerkategorien",
             data: counts,
+            backgroundColor: ["#004aad", "#00b4d8", "#90e0ef"]
           }]
         },
         options: {
-          plugins: { title: { display: true, text: "Nutzerkategorien" } }
+          plugins: { legend: { position: "bottom" } },
+          responsive: true,
+          maintainAspectRatio: false
         }
       });
     }

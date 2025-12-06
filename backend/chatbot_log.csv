@@ -1,5 +1,12 @@
 timestamp,user_id,abschlussziel,studiengang,nutzerkategorie,entscheidung
 
-2025-12-06T11:18:47.945825,4adbdd8e-dc04-468b-8de1-ed8ddfdb5f8b,Bachelor,Unbekannt,bachelorbewerber,Unklar
-2025-12-06T11:19:19.724255,818744d6-e56f-4efa-bdd9-171aea65cdbf,Master,Digitale Technologien,master_intern,Ja
-2025-12-06T11:20:02.709118,0a2ca743-19cd-4f8c-971f-e73041d835fa,Master,Maschinenbau,master_extern,Ja
+
+2025-12-06T11:34:15.700600,da0b91e4-07a6-49e5-825c-d70f8bd8592e,Master,Angewandte Automatisierung,master_intern,Nein
+2025-12-06T11:35:27.506602,4c5491f3-d136-4600-9816-6b85426f1d12,Master,Digitale Technologien,master_extern,Ja
+2025-12-06T11:36:44.770716,3cbf4eca-0263-45f2-b152-ea0a6ef4ef45,Master,Maschinenbau,master_extern,Ja
+2025-12-06T11:37:23.712521,d212ed33-c67b-4509-b0eb-5d38db03fc6c,Master,Wirtschaftsingenieurwesen,master_extern,Ja
+2025-12-06T11:38:01.570443,ad5020e6-ee55-41e7-b1fa-5379b3de1487,Master,Elektrotechnik,master_extern,Ja
+2025-12-06T11:39:20.691383,e78861a5-3d59-433c-a96a-4dcd6e25c225,Master,Digitale Technologien,master_intern,Ja
+2025-12-06T11:42:52.877427,77abc50f-1e1a-4d73-aefd-40ba15a587a7,Bachelor,Unbekannt,bachelorbewerber,Unklar
+2025-12-06T11:46:21.492496,a065d795-b6a9-472b-96dc-4814a73c0fdd,Master,Maschinenbau,master_extern,Ja
+2025-12-06T11:47:04.978769,51efa026-23e3-45a7-861a-0e8bbe9e9624,Master,Maschinenbau,master_intern,Ja
