@@ -5,7 +5,7 @@ __pycache__/
 *.pyd
 .env
 venv
-chatlog.csv
+
 # IDE / Editor
 .vscode/
 .idea/
@@ -19,3 +19,4 @@ dist/
 
 # Sonstiges
 *.log
+chatlog.csv
