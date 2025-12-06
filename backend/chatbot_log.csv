@@ -10,3 +10,4 @@ timestamp,user_id,abschlussziel,studiengang,nutzerkategorie,entscheidung
 2025-12-06T11:42:52.877427,77abc50f-1e1a-4d73-aefd-40ba15a587a7,Bachelor,Unbekannt,bachelorbewerber,Unklar
 2025-12-06T11:46:21.492496,a065d795-b6a9-472b-96dc-4814a73c0fdd,Master,Maschinenbau,master_extern,Ja
 2025-12-06T11:47:04.978769,51efa026-23e3-45a7-861a-0e8bbe9e9624,Master,Maschinenbau,master_intern,Ja
+2025-12-06T11:58:11.217678,8aa40245-2476-47b1-b070-d79ac5adbf49,Master,Digitale Technologien,master_intern,Ja
