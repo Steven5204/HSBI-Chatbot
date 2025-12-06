@@ -10,36 +10,36 @@ except Exception as e:
 questions = [
     {
         "key": "abschlussziel",
-        "text": "Für welchen Abschluss interessieren Sie sich?",
+        "text": "Für welchen Abschluss interessierst du dich??",
         "options": ["Bachelor", "Master"]
     },
 
     {
         "key": "hochschulzugang",
-        "text": "Besitzen Sie eine Hochschulzugangsberechtigung (z. B. Abitur, Fachabitur oder eine berufliche Qualifikation)?",
+        "text": "Besitzt du eine Hochschulzugangsberechtigung (z. B. Abitur, Fachabitur oder eine berufliche Qualifikation)?",
         "options": ["Ja", "Nein"],
         "depends_on": {"abschlussziel": "Bachelor"}
     },
 
     {
         "key": "hsbi_bachelor",
-        "text": "Haben Sie Ihren Bachelor an der HSBI gemacht?",
+        "text": "Hast du deinen Bachelor an der HSBI gemacht?",
         "options": ["Ja", "Nein"],
         "depends_on": {"abschlussziel": "Master"}
     },
     {
         "key": "bachelorstudiengang",
-        "text": "Welchen Bachelorstudiengang haben Sie an der HSBI abgeschlossen?",
+        "text": "Welchen Bachelorstudiengang hast du an der HSBI abgeschlossen?",
         "depends_on": {"hsbi_bachelor": "Ja"}
     },
     {
         "key": "bachelorstudiengang",
-        "text": "Welchen Bachelorstudiengang haben Sie abgeschlossen?",
+        "text": "Welchen Studiengang hast du abgeschlossen?",
         "depends_on": {"hsbi_bachelor": "Nein"}
     },
     {
         "key": "studiengang",
-        "text": "Für welchen Masterstudiengang interessieren Sie sich?",
+        "text": "Für welchen Masterstudiengang interessierst du dich?",
         "options": [
             "Angewandte Automatisierung",
             "Digitale Technologien",
@@ -51,17 +51,17 @@ questions = [
     },
     {
         "key": "abschlussnote",
-        "text": "Welche Abschlussnote haben Sie im Bachelor?",
+        "text": "Welche Abschlussnote hast du in deinem Vorstudium?",
         "depends_on": {"abschlussziel": "Master"}
     },
     {
         "key": "berufserfahrung",
-        "text": "Wie viele Jahre Berufserfahrung haben Sie nach Ihrem Bachelor gesammelt?",
+        "text": "Wie viele Jahre Berufserfahrung hast du nach deinem Vorstudium gesammelt?",
         "depends_on": {"abschlussziel": "Master"}
     },
     {
         "key": "englischkenntnisse",
-        "text": "Besitzen Sie Englischkenntnisse auf mindestens B2-Niveau?",
+        "text": "Besitzt du Englischkenntnisse auf mindestens B2-Niveau?",
         "options": ["Ja", "Nein"],
         "depends_on": {"abschlussziel": "Master"}
     }

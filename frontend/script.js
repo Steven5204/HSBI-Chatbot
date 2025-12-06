@@ -81,6 +81,16 @@ async function sendMessage(message) {
       if (data.progress !== undefined) {
         updateProgress(data.progress);
       }
+
+      // 🔹 Bewerben-Button aktivieren, wenn Entscheidung "Ja"
+      if (data.decision && data.decision.toLowerCase() === "ja") {
+        applyBtn.disabled = false; // Aktivieren
+        applyBtn.classList.add("active-apply"); // CSS-Effekt hinzufügen (optional)
+        
+      } else {
+        applyBtn.disabled = true;
+        applyBtn.classList.remove("active-apply");
+      }
     }
   } catch (err) {
     appendMessage("bot", "🚫 Fehler bei der Serververbindung.");
@@ -118,5 +128,5 @@ helpBtn.addEventListener("click", () => {
 });
 
 applyBtn.addEventListener("click", () => {
-  window.open("https://www.hsbi.de/masterbewerbung", "_blank");
+  window.open("https://www.hsbi.de/studiengaenge", "_blank");
 });

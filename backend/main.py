@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from conversation import get_next_question, update_state, questions
 from openai_client import get_openai_decision
 from rules_excel import load_excel_rules
+from logging_handler import log_interaction, generate_report
 
 
 
@@ -68,8 +69,22 @@ async def chat(request: Request):
     # === Wenn alle Fragen beantwortet sind → GPT Entscheidung ===
     try:
         decision_data = get_openai_decision(state, RULES)
+
+        # 🔹 Logging der Interaktion
+        log_interaction(
+            user_id=user_id,
+            abschlussziel=state.get("abschlussziel", "Unbekannt"),
+            studiengang=state.get("studiengang", "Unbekannt"),
+            nutzerkategorie=(
+            "master_intern" if state.get("hsbi_bachelor", "").lower() == "ja"
+            else "master_extern" if state.get("abschlussziel", "").lower() == "master"
+            else "bachelorbewerber"),
+            entscheidung=decision_data.get("decision", "Unklar")
+        )
+
         return {
             "response": decision_data["formatted_response"],
+            "decision": decision_data.get("decision", "Unklar"),
             "options": [],
             "progress": 100
         }
@@ -85,3 +100,12 @@ async def chat(request: Request):
 def root():
     return {"message": "HSBI Chatbot Backend läuft ✅"}
 
+@app.get("/report")
+def get_report(days: int = 30):
+    """
+    Gibt eine Zusammenfassung der Chatbot-Nutzung im gewählten Zeitraum zurück.
+    Beispiel: /report?days=7
+    """
+    from logging_handler import generate_report
+    report = generate_report(days)
+    return report

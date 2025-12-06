@@ -182,17 +182,29 @@ def get_openai_decision(applicant_data: dict, rules: dict):
         if hasattr(response, "choices") and len(response.choices) > 0:
             decision_text = response.choices[0].message.content.strip()
 
+        # 🔹 Entscheidung direkt aus dem GPT-Text extrahieren
+        decision_match = re.search(r"Entscheidung:\s*(Ja|Nein|Unklar)", decision_text, re.IGNORECASE)
+        decision_value = decision_match.group(1).capitalize() if decision_match else "Unklar"
+
         # 🔹 Formatieren oder Fallback
         if not decision_text:
             formatted_output = "⚠️ Keine Antwort vom Entscheidungsmodul erhalten."
+            decision_value = "Unklar"
         else:
             formatted_output = format_markdown_response(decision_text)
 
+            # 🔍 Entscheidung (Ja/Nein/Unklar) aus dem GPT-Text extrahieren
+            match = re.search(r"(?i)\b(ja|nein|unklar)\b", decision_text)
+            decision_value = match.group(1).capitalize() if match else "Unklar"
+
+        # 🧩 Immer Entscheidung mitsenden
         return {
-            "formatted_response": formatted_output
+            "formatted_response": formatted_output,
+            "decision": decision_value
         }
 
     except Exception as e:
         return {
-            "formatted_response": f"❌ Fehler bei der Entscheidungsanalyse: {str(e)}"
+            "formatted_response": f"❌ Fehler bei der Entscheidungsanalyse: {str(e)}",
+            "decision": "Unklar"
         }
