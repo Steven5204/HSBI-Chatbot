@@ -122,28 +122,50 @@ def get_openai_decision(applicant_data: dict, rules: dict):
             - **Bewerbungsunterlagen:** Welche Dokumente müssen eingereicht werden (z. B. Zeugnisse, Lebenslauf)
             """
         else:
-            # 🟨 Masterbewerber → Vollständige Logik mit ECTS
-            user_prompt = f"""
-            Bewerberdaten:
-            {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
+            # 🟨 Masterbewerber → Extern vs Intern unterscheiden
+            if nutzerkategorie == "extern":
+                user_prompt = f"""
+                Du bist Studienberater der HSBI. Der Bewerber möchte sich extern für einen Masterstudiengang bewerben.
 
-            Studienregeln (aus Excel):
-            {json.dumps(rules, indent=2, ensure_ascii=False)}
+                Bewerberdaten:
+                {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
 
-            Bewerberstatus: {nutzerkategorie.upper()}
-            Bachelorstudiengang: {bachelorstudiengang}
-            Angestrebter Masterstudiengang: {masterstudiengang}
+                Studienregeln (aus Excel):
+                {json.dumps(rules, indent=2, ensure_ascii=False)}
 
-            Wenn der Bewerber extern ist, weise darauf hin,
-            dass die ECTS-Anrechnung durch das Prüfungsamt geprüft werden muss.
+                Erkläre, dass keine ECTS-Angaben geprüft werden können, 
+                da diese erst durch das Prüfungsamt bewertet werden.
+                Beurteile nur die formalen Voraussetzungen (Note, Berufserfahrung, Englischkenntnisse).
+                Wenn diese vorliegen, gib aus, dass eine vorläufige Zulassung möglich ist, unter der Voraussetzunge, dass die abgeschlossenen Module ähnlich genug sind.
+                
 
-            Antworte im Markdown-Format:
-            - **Entscheidung:** Ja/Nein/Unklar
-            - **Begründung:** Warum oder warum nicht
-            - **ECTS-Vergleich:** Falls relevant, liste Soll/Ist und Bewertung auf
-            - **Weitere Voraussetzungen:** Note, Berufserfahrung, Englischkenntnisse
-            - **Bewerbungsunterlagen:** Welche Unterlagen sind erforderlich
-            """
+                Antworte im Markdown-Format:
+                - **Entscheidung:** Ja/Nein/Unklar
+                - **Begründung:** Warum oder warum nicht
+                - **Weitere Voraussetzungen:** Note, Berufserfahrung, Englischkenntnisse
+                - **Bewerbungsunterlagen:** Welche Unterlagen erforderlich sind
+                """
+            else:
+                # 🟩 Interner Bewerber → mit ECTS-Vergleich
+                user_prompt = f"""
+                Du bist Studienberater der HSBI. Der Bewerber ist interner Masterbewerber.
+
+                Bewerberdaten:
+                {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
+
+                Studienregeln (aus Excel):
+                {json.dumps(rules, indent=2, ensure_ascii=False)}
+
+                Analysiere die Voraussetzungen inkl. ECTS-Vergleich. 
+                Zeige Soll/Ist und bewerte, ob die Anforderungen erfüllt sind.
+
+                Antworte im Markdown-Format:
+                - **Entscheidung:** Ja/Nein/Unklar
+                - **Begründung:** Warum oder warum nicht
+                - **ECTS-Vergleich:** Liste Soll/Ist und Bewertung auf
+                - **Weitere Voraussetzungen:** Note, Berufserfahrung, Englischkenntnisse
+                - **Bewerbungsunterlagen:** Welche Unterlagen erforderlich sind
+                """
 
         # 🔹 GPT-Aufruf
         response = client.chat.completions.create(
