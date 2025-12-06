@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>HSBI Chatbot – Statistik</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f5f7fb;
+      margin: 0;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #004aad;
+    }
+    .metrics {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .card {
+      background: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+      min-width: 180px;
+    }
+    .card h2 {
+      margin: 0.2rem;
+      color: #004aad;
+    }
+    canvas {
+      background: white;
+      padding: 1rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 HSBI Chatbot Statistik</h1>
+
+  <div class="metrics">
+    <div class="card">
+      <h2 id="users">0</h2>
+      <p>Nutzer</p>
+    </div>
+    <div class="card">
+      <h2 id="success">0</h2>
+      <p>Erfolgreiche Bewerbungen</p>
+    </div>
+    <div class="card">
+      <h2 id="days">0</h2>
+      <p>Tage</p>
+    </div>
+  </div>
+
+  <canvas id="programsChart" width="400" height="200"></canvas>
+  <canvas id="mastersChart" width="400" height="200"></canvas>
+  <canvas id="categoryChart" width="400" height="200"></canvas>
+
+  <script>
+    async function loadReport() {
+        
+       const baseUrl = window.location.origin.includes("localhost")
+        ? "http://127.0.0.1:5000"
+        : window.location.origin;
+
+
+      const response = await fetch(`${baseUrl}/report`); 
+      const data = await response.json();
+
+      // 🧩 Karten aktualisieren
+      document.getElementById("users").innerText = data.anzahl_nutzer;
+      document.getElementById("success").innerText = data.erfolgreiche_bewerbungen;
+      document.getElementById("days").innerText = data.zeitraum_tage;
+
+      // 📊 Beliebteste Studiengänge
+      const ctxPrograms = document.getElementById("programsChart");
+      new Chart(ctxPrograms, {
+        type: "bar",
+        data: {
+          labels: data.beliebteste_studiengänge.map(i => i[0]),
+          datasets: [{
+            label: "Studiengänge",
+            data: data.beliebteste_studiengänge.map(i => i[1]),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: { title: { display: true, text: "Beliebteste Studiengänge" } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      // 📈 Beliebteste Masterstudiengänge
+      const ctxMasters = document.getElementById("mastersChart");
+      new Chart(ctxMasters, {
+        type: "bar",
+        data: {
+          labels: data.beliebteste_masterstudiengänge.map(i => i[0]),
+          datasets: [{
+            label: "Masterstudiengänge",
+            data: data.beliebteste_masterstudiengänge.map(i => i[1]),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          plugins: { title: { display: true, text: "Beliebteste Masterstudiengänge" } },
+          scales: { y: { beginAtZero: true } }
+        }
+      });
+
+      // 🥧 Nutzerkategorien
+      const ctxCategories = document.getElementById("categoryChart");
+      const categories = Object.keys(data.nutzertypen);
+      const counts = Object.values(data.nutzertypen);
+
+      new Chart(ctxCategories, {
+        type: "pie",
+        data: {
+          labels: categories,
+          datasets: [{
+            label: "Nutzerkategorien",
+            data: counts,
+          }]
+        },
+        options: {
+          plugins: { title: { display: true, text: "Nutzerkategorien" } }
+        }
+      });
+    }
+
+    loadReport();
+  </script>
+</body>
+</html>
