@@ -30,25 +30,11 @@ questions = [
     {
         "key": "bachelorstudiengang",
         "text": "Welchen Bachelorstudiengang haben Sie an der HSBI abgeschlossen?",
-        "options": [
-            "Digitale Technologien",
-            "Informatik",
-            "Maschinenbau",
-            "Elektrotechnik",
-            "Wirtschaftsingenieurwesen"
-        ],
         "depends_on": {"hsbi_bachelor": "Ja"}
     },
     {
         "key": "bachelorstudiengang",
         "text": "Welchen Bachelorstudiengang haben Sie abgeschlossen?",
-        "options": [
-            "Informatik",
-            "Elektrotechnik",
-            "Maschinenbau",
-            "Wirtschaftsinformatik",
-            "Digitale Technologien"
-        ],
         "depends_on": {"hsbi_bachelor": "Nein"}
     },
     {
