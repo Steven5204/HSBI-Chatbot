@@ -1,35 +1,36 @@
 import pandas as pd
 
-def get_vertiefungen_for(bachelorstudiengang: str, studienart: str, path="zulassung.xlsx"):
+def get_vertiefungen_for(studiengang: str, studienart: str = None) -> list:
     """
-    Liest aus der Excel-Datei (Registerkarte 'Modulzusammensetzung') alle verfügbaren Vertiefungsrichtungen
-    für den angegebenen Bachelorstudiengang und die Studienart.
-    Gibt eine Liste der Vertiefungen zurück (z. B. ['Logistik', 'Technik']).
+    Gibt alle Vertiefungen aus der Excel-Datei zurück,
+    die zu einem bestimmten Bachelorstudiengang (und optional Studienart) gehören.
+    Funktioniert robust gegen Leerzeichen, Groß-/Kleinschreibung und Tippfehler.
     """
+    import pandas as pd
+
     try:
-        xls = pd.ExcelFile(path)
-        df = pd.read_excel(xls, "Modulzusammensetzung")
+        df = pd.read_excel("zulassung.xlsx", sheet_name="Modulzusammensetzung")
 
-        # 🔧 Spaltennamen prüfen
-        expected_cols = ["Bachelorstudiengang", "Studienart", "Vertiefung"]
-        for col in expected_cols:
-            if col not in df.columns:
-                raise KeyError(f"Spalte '{col}' fehlt in der Excel-Datei.")
+        # Normalisiere Texte (entferne Leerzeichen, Kleinbuchstaben)
+        df["Bachelorstudiengang"] = df["Bachelorstudiengang"].astype(str).str.strip().str.lower()
+        df["Studienart"] = df["Studienart"].astype(str).str.strip().str.lower()
+        df["Vertiefung"] = df["Vertiefung"].astype(str).str.strip()
 
-        # 🔍 Filter auf passenden Studiengang + Studienart
-        mask = (
-            (df["Bachelorstudiengang"].astype(str).str.lower() == str(bachelorstudiengang).strip().lower())
-            & (df["Studienart"].astype(str).str.lower() == str(studienart).strip().lower())
-        )
-        matching = df.loc[mask]
+        studiengang_norm = str(studiengang).strip().lower()
+        studienart_norm = str(studienart).strip().lower() if studienart else None
 
-        # 🎯 Alle Vertiefungen extrahieren
-        vertiefungen = sorted(
-            [v for v in matching["Vertiefung"].dropna().unique() if str(v).strip() != ""]
-        )
+        # Filter anwenden
+        subset = df[df["Bachelorstudiengang"] == studiengang_norm]
+        if studienart_norm:
+            subset = subset[subset["Studienart"] == studienart_norm]
 
-        print(f"[Excel] Vertiefungen gefunden für {bachelorstudiengang} ({studienart}): {vertiefungen}")
-        return vertiefungen
+        vertiefungen = subset["Vertiefung"].dropna().unique().tolist()
+
+        # Filtere leere Strings heraus
+        vertiefungen = [v for v in vertiefungen if v and v.strip() != "" and v.lower() != "nan"]
+
+        print(f"[Excel] Vertiefungen gefunden für {studiengang} ({studienart}): {vertiefungen}")
+        return sorted(vertiefungen)
 
     except Exception as e:
         print(f"[Fehler in get_vertiefungen_for]: {e}")
