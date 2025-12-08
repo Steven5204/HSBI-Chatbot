@@ -5,6 +5,8 @@ import re
 import difflib
 from dotenv import load_dotenv
 import re
+from rules_excel import get_bachelor_ects
+import pandas as pd
 
 
 load_dotenv()
@@ -146,12 +148,27 @@ def get_openai_decision(applicant_data: dict, rules: dict):
                 - **Bewerbungsunterlagen:** Welche Unterlagen erforderlich sind
                 """
             else:
-                # 🟩 Interner Bewerber → mit ECTS-Vergleich
-                # 🧮 ECTS-Daten aus conversation.py verwenden
-                ects_ist = applicant_data.get("ects_ist", {})
-                ects_soll = rules.get("ects_anforderungen", {})  # falls du Soll-ECTS aus Excel übergibst
+                # 🟩 INTERNER MASTERBEWERBER MIT ECHTEM ECTS-VERGLEICH ------------------
+                
+                # 🆕 1️⃣ Excel-Daten laden
+                df_zusammensetzung = pd.read_excel("zulassung.xlsx", sheet_name="Modulzusammensetzung")
+                df_modules = pd.read_excel("zulassung.xlsx", sheet_name="Module")
 
-                # 📊 ECTS in Textform bringen
+                # 🆕 2️⃣ ECTS berechnen (Ist-Werte)
+                ects_ist = get_bachelor_ects(
+                    bachelorstudiengang,
+                    applicant_data.get("studienart", ""),
+                    applicant_data.get("vertiefung", ""),
+                    df_modules,
+                    df_zusammensetzung
+                )
+
+                # 🆕 3️⃣ Soll-Werte aus Rules extrahieren
+                ects_soll = {}
+                if "Studiengänge" in rules and masterstudiengang in rules["Studiengänge"]:
+                    ects_soll = rules["Studiengänge"][masterstudiengang].get("ECTS_Anforderungen", {})
+
+                # 🆕 4️⃣ ECTS schön formatieren
                 ects_ist_text = (
                     "\n".join([f"- {k}: {v} ECTS" for k, v in ects_ist.items()])
                     if ects_ist else "- Keine Daten verfügbar"
@@ -160,6 +177,8 @@ def get_openai_decision(applicant_data: dict, rules: dict):
                     "\n".join([f"- {k}: {v} ECTS" for k, v in ects_soll.items()])
                     if ects_soll else "- Keine Angaben verfügbar"
                 )
+
+                # 🆕 5️⃣ Prompt vorbereiten
                 user_prompt = f"""
                 Du bist Studienberater der HSBI. Der Bewerber ist interner Masterbewerber.
 
@@ -177,7 +196,7 @@ def get_openai_decision(applicant_data: dict, rules: dict):
                 Ist (berechnet aus Bachelor-Struktur):
                 {ects_ist_text}
 
-                Analysiere die Voraussetzungen inkl. ECTS-Vergleich. 
+                Analysiere die Voraussetzungen inkl. ECTS-Vergleich.
                 Zeige Soll/Ist und bewerte, ob die Anforderungen erfüllt sind.
 
                 Antworte im Markdown-Format:

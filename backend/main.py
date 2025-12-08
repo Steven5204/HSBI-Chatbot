@@ -4,9 +4,6 @@ from conversation import get_next_question, update_state, questions
 from openai_client import get_openai_decision
 from rules_excel import load_excel_rules
 from logging_handler import log_interaction, generate_report
-
-
-
 import uuid
 
 # === App-Setup ===
@@ -33,6 +30,7 @@ def calculate_progress(state: dict) -> int:
     progress = int((answered / total_questions) * 100)
     return min(progress, 100)
 
+
 # === Chat-Route ===
 @app.post("/chat")
 async def chat(request: Request):
@@ -47,14 +45,28 @@ async def chat(request: Request):
     if not isinstance(state, dict):
         state = {}
 
-    # === Update State ===
-    state = update_state(state, message)
+    # === 🟢 Update State (Rückgabe kann dict mit next_question sein) ===
+    update_result = update_state(state, message)
+
+    # 🟢 Sicherstellen, dass state richtig aktualisiert wird
+    state = update_result.get("state", update_result)
     SESSIONS[user_id] = state
 
-    # === Nächste Frage bestimmen ===
+    # 🟢 Falls update_state bereits eine nächste Frage mitliefert:
+    if "next_question" in update_result:
+        response_text = update_result["next_question"]
+        options = update_result.get("options", [])
+        progress = calculate_progress(state)
+
+        return {
+            "response": response_text,
+            "options": options,
+            "progress": progress
+        }
+
+    # === Nächste Frage bestimmen (falls update_state keine mitgegeben hat) ===
     next_q = get_next_question(state)
 
-    # === Falls noch Fragen offen sind ===
     if next_q:
         response_text = next_q["text"]
         options = next_q.get("options", [])
@@ -76,9 +88,10 @@ async def chat(request: Request):
             abschlussziel=state.get("abschlussziel", "Unbekannt"),
             studiengang=state.get("studiengang", "Unbekannt"),
             nutzerkategorie=(
-            "master_intern" if state.get("hsbi_bachelor", "").lower() == "ja"
-            else "master_extern" if state.get("abschlussziel", "").lower() == "master"
-            else "bachelorbewerber"),
+                "master_intern" if state.get("hsbi_bachelor", "").lower() == "ja"
+                else "master_extern" if state.get("abschlussziel", "").lower() == "master"
+                else "bachelorbewerber"
+            ),
             entscheidung=decision_data.get("decision", "Unklar")
         )
 
@@ -95,10 +108,12 @@ async def chat(request: Request):
             "progress": 100
         }
 
+
 # === Startseite-Test ===
 @app.get("/")
 def root():
     return {"message": "HSBI Chatbot Backend läuft ✅"}
+
 
 @app.get("/report")
 def get_report(days: int = 30):
