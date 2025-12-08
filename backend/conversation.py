@@ -1,4 +1,4 @@
-from rules_excel import load_excel_rules
+from rules_excel import load_excel_rules, calculate_bachelor_ects
 
 # Lade Regelwerk aus Excel (nur einmal beim Start)
 try:
@@ -131,4 +131,25 @@ def update_state(state, user_input):
             if q["key"] == "master_typ":
                 state["nutzerkategorie"] = "master_intern" if user_input == "Ja" else "master_extern"
             return state
+        # 🔹 Wenn der Nutzer einen HSBI-Bachelor hat → prüfe, ob ECTS berechnet werden können
+    if state.get("hsbi_bachelor") == "Ja":
+        required_keys = ["bachelorstudiengang", "studienart", "vertiefung"]
+
+        # Wenn alle drei Angaben vorhanden sind
+        if all(key in state for key in required_keys):
+            from rules_excel import calculate_bachelor_ects
+            try:
+                ects_data = calculate_bachelor_ects(
+                    state["bachelorstudiengang"],
+                    state["studienart"],
+                    state["vertiefung"]
+                )
+                if ects_data:
+                    state["ects_ist"] = ects_data
+                    print(f"[ECTS-Berechnung erfolgreich]: {ects_data}")
+                else:
+                    print("[ECTS-Berechnung] Keine Daten gefunden für diese Kombination.")
+            except Exception as e:
+                print(f"[Fehler bei ECTS-Berechnung]: {e}")
+        
     return state

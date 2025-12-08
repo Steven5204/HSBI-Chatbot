@@ -147,6 +147,19 @@ def get_openai_decision(applicant_data: dict, rules: dict):
                 """
             else:
                 # 🟩 Interner Bewerber → mit ECTS-Vergleich
+                # 🧮 ECTS-Daten aus conversation.py verwenden
+                ects_ist = applicant_data.get("ects_ist", {})
+                ects_soll = rules.get("ects_anforderungen", {})  # falls du Soll-ECTS aus Excel übergibst
+
+                # 📊 ECTS in Textform bringen
+                ects_ist_text = (
+                    "\n".join([f"- {k}: {v} ECTS" for k, v in ects_ist.items()])
+                    if ects_ist else "- Keine Daten verfügbar"
+                )
+                ects_soll_text = (
+                    "\n".join([f"- {k}: {v} ECTS" for k, v in ects_soll.items()])
+                    if ects_soll else "- Keine Angaben verfügbar"
+                )
                 user_prompt = f"""
                 Du bist Studienberater der HSBI. Der Bewerber ist interner Masterbewerber.
 
@@ -155,6 +168,14 @@ def get_openai_decision(applicant_data: dict, rules: dict):
 
                 Studienregeln (aus Excel):
                 {json.dumps(rules, indent=2, ensure_ascii=False)}
+
+                **ECTS-Vergleich laut Excel-Daten:**
+
+                Soll:
+                {ects_soll_text}
+
+                Ist (berechnet aus Bachelor-Struktur):
+                {ects_ist_text}
 
                 Analysiere die Voraussetzungen inkl. ECTS-Vergleich. 
                 Zeige Soll/Ist und bewerte, ob die Anforderungen erfüllt sind.
