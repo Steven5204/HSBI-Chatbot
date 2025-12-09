@@ -41,6 +41,18 @@ async def chat(request: Request):
     # Lade Session-Zustand oder erzeuge neuen
     state = SESSIONS.get(user_id, {})
 
+    # 🟢 Falls neue Session → Start-Log
+    if not state:
+        log_interaction(
+            user_id=user_id,
+            abschlussziel="Unbekannt",
+            studiengang="Unbekannt",
+            nutzerkategorie="Unbekannt",
+            entscheidung="-",
+            status="gestartet",
+            progress=0
+        )
+
     # === Sicherstellen, dass state ein dict ist ===
     if not isinstance(state, dict):
         state = {}
@@ -72,6 +84,17 @@ async def chat(request: Request):
         options = next_q.get("options", [])
         progress = calculate_progress(state)
 
+        # 📊 Logge den aktuellen Fortschritt
+        log_interaction(
+            user_id=user_id,
+            abschlussziel=state.get("abschlussziel", "Unbekannt"),
+            studiengang=state.get("studiengang", "Unbekannt"),
+            nutzerkategorie=state.get("nutzerkategorie", "Unbekannt"),
+            entscheidung="-",
+            status="in_progress",
+            progress=progress
+        )
+
         return {
             "response": response_text,
             "options": options,
@@ -91,13 +114,19 @@ async def chat(request: Request):
         log_interaction(
             user_id=user_id,
             abschlussziel=state.get("abschlussziel", "Unbekannt"),
-            studiengang=logged_studiengang,
+            studiengang=(
+                "Bachelor"
+                if state.get("abschlussziel", "").lower() == "bachelor"
+                else state.get("studiengang", "Unbekannt")
+            ),
             nutzerkategorie=(
                 "master_intern" if state.get("hsbi_bachelor", "").lower() == "ja"
                 else "master_extern" if state.get("abschlussziel", "").lower() == "master"
                 else "bachelorbewerber"
             ),
-            entscheidung=decision_data.get("decision", "Unklar")
+            entscheidung=decision_data.get("decision", "Unklar"),
+            status="abgeschlossen",   # 🟢 Neue Spalte für Abschlussstatus
+            progress=100              # 🟢 Fortschritt auf 100 % setzen
         )
 
         return {

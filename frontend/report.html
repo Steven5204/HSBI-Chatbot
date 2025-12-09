@@ -13,7 +13,6 @@
       color: #1a1a1a;
     }
 
-    /* Titelbereich mit Maskottchen */
     .header {
       display: flex;
       justify-content: center;
@@ -112,7 +111,7 @@
   </style>
 </head>
 <body>
-  <!-- 🦊 Kopfbereich mit Maskottchen -->
+  <!-- 🦊 Kopfbereich -->
   <div class="header">
     <img src="fox.png" alt="HSBI Maskottchen" />
     <h1>HSBI Chatbot Statistik Dashboard</h1>
@@ -132,9 +131,13 @@
       <h2 id="days">0</h2>
       <p>Zeitraum (Tage)</p>
     </div>
+    <div class="card">
+      <h2 id="dropout">0%</h2>
+      <p>Abbruchquote</p>
+    </div>
   </div>
 
-  <!-- Charts -->
+  <!-- Diagramme -->
   <div class="dashboard">
     <div class="chart-card">
       <h3>Beliebteste Masterstudiengänge</h3>
@@ -159,11 +162,15 @@
       const data = await response.json();
 
       // Zahlen aktualisieren
-      document.getElementById("users").innerText = data.anzahl_nutzer;
-      document.getElementById("success").innerText = data.erfolgreiche_bewerbungen;
-      document.getElementById("days").innerText = data.zeitraum_tage;
+      document.getElementById("users").innerText = data.total_users;
+      document.getElementById("success").innerText = data.completed;
+      document.getElementById("days").innerText = data.period_days;
+      document.getElementById("dropout").innerText = data.dropout_rate + "%";
 
-      // Studiengänge
+      // Falls keine Chart-Daten vorhanden sind (z. B. bei leerem Log)
+      if (!data.beliebteste_studiengänge || !data.nutzertypen) return;
+
+      // Beliebteste Studiengänge (Bar Chart)
       new Chart(document.getElementById("programsChart"), {
         type: "bar",
         data: {
@@ -185,7 +192,7 @@
         }
       });
 
-      // Nutzerkategorien
+      // Nutzerkategorien (Pie Chart)
       const categories = Object.keys(data.nutzertypen);
       const counts = Object.values(data.nutzertypen);
       new Chart(document.getElementById("categoryChart"), {
