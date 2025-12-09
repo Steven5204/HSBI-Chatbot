@@ -82,11 +82,16 @@ async def chat(request: Request):
     try:
         decision_data = get_openai_decision(state, RULES)
 
-        # 🔹 Logging der Interaktion
+        # 🎓 Studiengang für Logging bestimmen
+        if state.get("abschlussziel", "").lower() == "bachelor":
+            logged_studiengang = "Bachelor"
+        else:
+            logged_studiengang = state.get("studiengang", "Unbekannt")
+
         log_interaction(
             user_id=user_id,
             abschlussziel=state.get("abschlussziel", "Unbekannt"),
-            studiengang=state.get("studiengang", "Unbekannt"),
+            studiengang=logged_studiengang,
             nutzerkategorie=(
                 "master_intern" if state.get("hsbi_bachelor", "").lower() == "ja"
                 else "master_extern" if state.get("abschlussziel", "").lower() == "master"

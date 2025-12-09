@@ -1,7 +1,7 @@
 import csv
 import os
 import pandas as pd
-from datetime import datetime, timedelta
+from datetime import datetime
 from collections import Counter
 
 LOG_FILE = "chatbot_log.csv"
@@ -53,7 +53,7 @@ def generate_report(days: int = 30):
             "user_id",
             "abschlussziel",
             "studiengang",
-            "nutzerkategorie",  # ✅ korrigiert!
+            "nutzerkategorie",  
             "entscheidung"
         ]
     elif df.shape[1] == 5:
@@ -64,7 +64,7 @@ def generate_report(days: int = 30):
             "studiengang",
             "entscheidung"
         ]
-        df["nutzerkategorie"] = "Unbekannt"  # alte Zeilen mit Platzhalter auffüllen
+        df["nutzerkategorie"] = "Bachelor"  # alte Zeilen mit Platzhalter auffüllen
     else:
         return {"error": f"Unerwartete Spaltenanzahl: {df.shape[1]}"}
 
