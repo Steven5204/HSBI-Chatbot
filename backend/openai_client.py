@@ -5,7 +5,7 @@ import re
 import difflib
 from dotenv import load_dotenv
 import re
-from rules_excel import get_bachelor_ects
+from rules_excel import calculate_bachelor_ects
 import pandas as pd
 
 
@@ -155,12 +155,10 @@ def get_openai_decision(applicant_data: dict, rules: dict):
                 df_modules = pd.read_excel("zulassung.xlsx", sheet_name="Module")
 
                 # 🆕 2️⃣ ECTS berechnen (Ist-Werte)
-                ects_ist = get_bachelor_ects(
+                ects_ist = calculate_bachelor_ects(
                     bachelorstudiengang,
                     applicant_data.get("studienart", ""),
                     applicant_data.get("vertiefung", ""),
-                    df_modules,
-                    df_zusammensetzung
                 )
 
                 # 🆕 3️⃣ Soll-Werte aus Rules extrahieren

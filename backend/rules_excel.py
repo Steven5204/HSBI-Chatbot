@@ -91,53 +91,6 @@ def load_excel_rules(path="zulassung.xlsx"):
     return rules
 
 
-def get_bachelor_ects(bachelorstudiengang, studienart, vertiefung, df_modules, df_zusammensetzung):
-    """
-    Liefert für einen bestimmten Bachelorstudiengang, Studienart und Vertiefung
-    die ECTS-Summe pro Kategorie, basierend auf den Pflichtmodulen aus der Excel-Tabelle.
-    """
-
-    # 🔹 Relevante Zeile im Tabellenblatt "Modulzusammensetzung" finden
-    subset = df_zusammensetzung[
-        (df_zusammensetzung["Bachelorstudiengang"].str.lower() == bachelorstudiengang.lower()) &
-        (df_zusammensetzung["Studienart"].str.lower() == studienart.lower()) &
-        (df_zusammensetzung["Vertiefung"].str.lower() == vertiefung.lower())
-    ]
-
-    if subset.empty:
-        print("⚠️ Keine passende Zeile für diesen Studiengang gefunden.")
-        return {}
-
-    # 🔹 Liste der Pflichtmodule extrahieren
-    module_list = subset.iloc[0]["Pflichtmodule"]
-    if isinstance(module_list, str):
-        module_list = [m.strip() for m in module_list.split(",")]
-    else:
-        module_list = []
-
-    # 🔹 Initialisiere ECTS-Summen
-    ects_sum = {
-        "Mathematik": 0,
-        "Technik": 0,
-        "Naturwissenschaft": 0,
-        "Betriebswirtschaft": 0,
-        "Informatik": 0,
-        "Elektrotechnik": 0
-    }
-
-    # 🔹 Pro Modul prüfen, welche Kategorien betroffen sind
-    for modul in module_list:
-        row = df_modules[df_modules["Modulbezeichnung"].str.lower() == modul.lower().strip()]
-        if not row.empty:
-            for cat in ects_sum.keys():
-                try:
-                    ects_sum[cat] += float(row.iloc[0][cat])
-                except Exception:
-                    continue
-
-    return ects_sum
-
-
 def get_general_requirements(rules):
     return rules["Allgemein"]
 
@@ -149,48 +102,73 @@ def get_program_requirements(rules, program):
 def calculate_bachelor_ects(studiengang: str, studienart: str, vertiefung: str):
     """
     Berechnet die aufsummierten ECTS für einen bestimmten Bachelorstudiengang
-    basierend auf der Excel-Tabelle 'Modulzusammensetzung'.
+    basierend auf der Excel-Tabelle 'Modulzusammensetzung' und 'Module'.
+    Erkennt automatisch Schreibvarianten (Pflichtmodule, Prlichtmodule etc.)
+    und rechnet dynamisch nach Kategorien (Mathematik, Technik, Informatik, ...).
     """
-    try:
-        df = pd.read_excel("zulassung.xlsx", sheet_name="Modulzusammensetzung")
 
-        # 🔍 Filter nach Kombination Studiengang / Studienart / Vertiefung
-        subset = df[
-            (df["Bachelorstudiengang"].str.lower() == studiengang.lower())
-            & (df["Studienart"].str.lower() == studienart.lower())
-            & (df["Vertiefung"].str.lower() == vertiefung.lower())
+    try:
+        # === 1️⃣ Modulzusammensetzung laden
+        df_zus = pd.read_excel("zulassung.xlsx", sheet_name="Modulzusammensetzung")
+        df_zus.columns = [str(c).strip().lower() for c in df_zus.columns]
+
+        # Spalten dynamisch finden
+        col_bachelor = next((c for c in df_zus.columns if "bachelor" in c), None)
+        col_studienart = next((c for c in df_zus.columns if "studienart" in c), None)
+        col_vertiefung = next((c for c in df_zus.columns if "vertiefung" in c), None)
+        col_module = next((c for c in df_zus.columns if "pflicht" in c or "modul" in c), None)
+
+        if not all([col_bachelor, col_studienart, col_vertiefung, col_module]):
+            raise KeyError("Fehlende Spalten (Bachelorstudiengang / Studienart / Vertiefung / Pflichtmodule)")
+
+        # Filter anwenden
+        subset = df_zus[
+            (df_zus[col_bachelor].str.lower() == studiengang.lower())
+            & (df_zus[col_studienart].str.lower() == studienart.lower())
+            & (df_zus[col_vertiefung].str.lower() == vertiefung.lower())
         ]
 
         if subset.empty:
-            print(f"[ECTS] Keine Daten für {studiengang} / {studienart} / {vertiefung}")
-            return None
+            print(f"[ECTS] Keine Einträge für {studiengang} / {studienart} / {vertiefung}")
+            return {}
 
-        # 🔹 Spaltenname „Prlichtmodule“ verwenden (Achtung Schreibfehler)
-        if "Pflichtmodule" not in subset.columns:
-            raise KeyError("Spalte 'Pflichtmodule' nicht in Excel gefunden.")
-
+        # === 2️⃣ Modulnamen extrahieren
         module_list = []
-        for mods in subset["Pflichtmodule"].dropna():
+        for mods in subset[col_module].dropna():
             for mod in str(mods).split(","):
                 module_list.append(mod.strip())
 
         if not module_list:
-            print(f"[ECTS] Keine Module gefunden für {studiengang}.")
-            return None
+            print(f"[ECTS] Keine Module gefunden für {studiengang} ({vertiefung})")
+            return {}
 
-        # 🔹 Module-Tabelle laden
-        df_modules = pd.read_excel("zulassung.xlsx", sheet_name="Module")
+        # === 3️⃣ Modulliste laden und filtern
+        df_mod = pd.read_excel("zulassung.xlsx", sheet_name="Module")
+        df_mod.columns = [str(c).strip().lower() for c in df_mod.columns]
 
-        # 🔹 Nur die relevanten Module filtern
-        df_filtered = df_modules[df_modules["Modulbezeichnung"].isin(module_list)]
+        col_modname = next((c for c in df_mod.columns if "modul" in c), None)
+        if not col_modname:
+            raise KeyError("Spalte mit Modulnamen nicht gefunden (z. B. 'Modulbezeichnung').")
 
-        # 🔹 Spalten außer „Modulbezeichnung“ sind Kategorien (Mathematik, Technik etc.)
-        category_cols = [c for c in df_filtered.columns if c != "Modulbezeichnung"]
+        # Nur relevante Module behalten (Groß-/Kleinschreibung ignorieren)
+        module_names = [m.strip().lower() for m in module_list]
+        df_mod[col_modname] = df_mod[col_modname].astype(str).str.strip().str.lower()
+        df_filtered = df_mod[df_mod[col_modname].isin(module_names)]
 
-        # 🔹 Jede Zelle enthält „x“ → 5 ECTS Punkte
-        df_filtered[category_cols] = df_filtered[category_cols].applymap(lambda x: 5 if str(x).strip().lower() == "x" else 0)
+        # === 4️⃣ Relevante ECTS-Kategorien automatisch erkennen
+        category_cols = [
+            c for c in df_filtered.columns
+            if any(x in c for x in ["mathematik", "technik", "naturwissenschaft", "betriebswirtschaft", "informatik", "elektrotechnik"])
+        ]
 
-        # 🔹 Summe pro Kategorie berechnen
+        if not category_cols:
+            print("[ECTS] Keine ECTS-Kategorien erkannt.")
+            return {}
+
+        # === 5️⃣ 'x' → 5 ECTS konvertieren und summieren
+        df_filtered[category_cols] = df_filtered[category_cols].applymap(
+            lambda x: 5 if str(x).strip().lower() == "x" else 0
+        )
         ects_sum = df_filtered[category_cols].sum().to_dict()
 
         print(f"[ECTS-Berechnung erfolgreich] {studiengang} / {vertiefung}: {ects_sum}")
@@ -198,4 +176,4 @@ def calculate_bachelor_ects(studiengang: str, studienart: str, vertiefung: str):
 
     except Exception as e:
         print(f"[Fehler bei ECTS-Berechnung]: {e}")
-        return None
+        return {}
