@@ -17,7 +17,7 @@ questions = [
     {"key": "bachelorstudiengang", "text": "Welchen Bachelorstudiengang hast du an der HSBI abgeschlossen?", "depends_on": {"hsbi_bachelor": "Ja"}},
     {"key": "studienart", "text": "Hast du praxisintegriert oder in Vollzeit studiert?", "options": ["praxisintegriert", "Vollzeit"], "depends_on": {"hsbi_bachelor": "Ja"}},
     {"key": "bachelorstudiengang", "text": "Welchen Studiengang hast du abgeschlossen?", "depends_on": {"hsbi_bachelor": "Nein"}},
-    {"key": "studiengang", "text": "Für welchen Masterstudiengang interessierst du dich?", "options": ["Angewandte Automatisierung", "Digitale Technologien", "Maschinenbau", "Wirtschaftsingenieurwesen", "Elektrotechnik"], "depends_on": {"abschlussziel": "Master"}},
+    {"key": "studiengang", "text": "Für welchen Masterstudiengang interessierst du dich?", "options": ["Angewandte Automatisierung", "Digitale Technologien", "Maschinenbau", "Wirtschaftsingenieurwesen"], "depends_on": {"abschlussziel": "Master"}},
     {"key": "abschlussnote", "text": "Welche Abschlussnote hast du in deinem Vorstudium?", "depends_on": {"abschlussziel": "Master"}},
     {"key": "berufserfahrung", "text": "Wie viele Jahre Berufserfahrung hast du nach deinem Vorstudium gesammelt?", "depends_on": {"abschlussziel": "Master"}},
     {"key": "englischkenntnisse", "text": "Besitzt du Englischkenntnisse auf mindestens B2-Niveau?", "options": ["Ja", "Nein"], "depends_on": {"abschlussziel": "Master"}}
