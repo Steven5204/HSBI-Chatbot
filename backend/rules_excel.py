@@ -171,6 +171,15 @@ def calculate_bachelor_ects(studiengang: str, studienart: str, vertiefung: str):
         )
         ects_sum = df_filtered[category_cols].sum().to_dict()
 
+        # 🧹 Sicherstellen, dass alle Werte numerisch sind
+        for k, v in ects_sum.items():
+            try:
+                ects_sum[k] = float(v)
+            except (ValueError, TypeError):
+                ects_sum[k] = 0.0
+        print("[DEBUG] Berechnete ECTS pro Kategorie:")
+        for k, v in ects_sum.items():
+            print(f"  {k}: {v}")
         print(f"[ECTS-Berechnung erfolgreich] {studiengang} / {vertiefung}: {ects_sum}")
         return ects_sum
 

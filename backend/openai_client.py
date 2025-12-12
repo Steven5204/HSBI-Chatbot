@@ -53,6 +53,64 @@ def format_markdown_response(raw_text: str) -> str:
     return formatted
 
 
+# 🧮 Vergleich Soll vs. Ist → Regelbasierte Entscheidung
+def evaluate_ects_decision(ects_soll, ects_ist):
+    """
+    Vergleicht Soll- und Ist-ECTS und liefert:
+    - "Ja" wenn alle Anforderungen erfüllt oder übertroffen sind
+    - "Unklar" wenn bis zu 10 ECTS fehlen
+    - "Nein" wenn mehr als 10 ECTS fehlen
+    Gibt zusätzlich eine Textbeschreibung des Vergleichs zurück.
+    """
+    if not ects_ist or not ects_soll:
+        return (
+            "Unklar",
+            "Einzelfallprüfung nötig, da unvollständige ECTS-Daten vorliegen.",
+            "Keine ausreichenden Vergleichsdaten verfügbar."
+        )
+
+    # 🔹 Einheitliche Keys (klein schreiben)
+    ects_soll = {k.strip().lower(): float(v) for k, v in ects_soll.items() if v is not None}
+    ects_ist = {k.strip().lower(): float(v) for k, v in ects_ist.items() if v is not None}
+
+    fehlende_gesamt = 0
+    details = []
+    vergleich_zeilen = []
+
+    for k, soll in ects_soll.items():
+        ist = ects_ist.get(k, 0.0)
+        diff = round(soll - ist, 2)
+
+        if ist < soll:
+            fehlende_gesamt += diff
+            vergleich_zeilen.append(f"• {k.capitalize()}: Soll {soll} / Ist {ist} → {diff} ECTS zu wenig")
+        else:
+            vergleich_zeilen.append(f"• {k.capitalize()}: Soll {soll} / Ist {ist} → erfüllt")
+
+    # 🔹 Bewertung nach fehlenden Punkten
+    if fehlende_gesamt == 0:
+        auto_decision = "Ja"
+        auto_reason = "Alle ECTS-Anforderungen sind erfüllt oder übertroffen."
+    elif fehlende_gesamt <= 10:
+        auto_decision = "Unklar"
+        auto_reason = (
+            f"Insgesamt fehlen nur {fehlende_gesamt} ECTS, insbesondere im Bereich "
+            f"{', '.join([k.capitalize() for k, soll in ects_soll.items() if ects_ist.get(k, 0) < soll])}. "
+            "Dies stellt einen Grenzfall dar und könnte im Einzelfall akzeptabel sein. "
+            "Daher wird eine Bewerbung empfohlen."
+        )
+    else:
+        auto_decision = "Nein"
+        auto_reason = (
+            f"Es fehlen insgesamt {fehlende_gesamt} ECTS in den Bereichen "
+            f"{', '.join([k.capitalize() for k, soll in ects_soll.items() if ects_ist.get(k, 0) < soll])}. "
+            "Die Voraussetzungen sind aktuell nicht erfüllt."
+        )
+
+    ects_comparison_text = "\n".join(vergleich_zeilen)
+
+    return auto_decision, auto_reason, ects_comparison_text
+
 def get_openai_decision(applicant_data: dict, rules: dict):
     """
     Übergibt die gesammelten Bewerberdaten und Studienregeln an OpenAI,
@@ -127,23 +185,32 @@ def get_openai_decision(applicant_data: dict, rules: dict):
             # 🟨 Masterbewerber → Extern vs Intern unterscheiden
             if nutzerkategorie == "extern":
                 user_prompt = f"""
-                Du bist Studienberater der HSBI. Der Bewerber möchte sich extern für einen Masterstudiengang bewerben.
+                Du bist Bifi, der Studienberater der HSBI.
+                Der Bewerber ist interner Masterbewerber.
+
+                Hier sind die bereits automatisch ausgewerteten Ergebnisse aus der Excel-Datenbasis:
+
+                Automatische Entscheidung: {auto_decision}
+                Automatische Begründung: {auto_reason}
 
                 Bewerberdaten:
                 {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
 
-                Studienregeln (aus Excel):
-                {json.dumps(rules, indent=2, ensure_ascii=False)}
+                ECTS-Vergleich laut Excel-Daten:
 
-                Erkläre, dass keine ECTS-Angaben geprüft werden können, 
-                da diese erst durch das Prüfungsamt bewertet werden.
-                Beurteile nur die formalen Voraussetzungen (Note, Berufserfahrung, Englischkenntnisse).
-                Wenn diese vorliegen, gib aus, dass eine vorläufige Zulassung möglich ist, unter der Voraussetzunge, dass die abgeschlossenen Module ähnlich genug sind.
-                
+                Soll:
+                {ects_soll_text}
+
+                Ist (berechnet aus Bachelor-Struktur):
+                {ects_ist_text}
+
+                Analysiere die Ergebnisse. Verwende die automatische Entscheidung und Begründung als Grundlage.
+                Formuliere sie im freundlichen, klaren Markdown-Stil.
 
                 Antworte im Markdown-Format:
                 - **Entscheidung:** Ja/Nein/Unklar
                 - **Begründung:** Warum oder warum nicht
+                - **ECTS-Vergleich:** Liste Soll/Ist und Bewertung auf
                 - **Weitere Voraussetzungen:** Note, Berufserfahrung, Englischkenntnisse
                 - **Bewerbungsunterlagen:** Welche Unterlagen erforderlich sind
                 """
@@ -161,10 +228,15 @@ def get_openai_decision(applicant_data: dict, rules: dict):
                     applicant_data.get("vertiefung", ""),
                 )
 
+                
                 # 🆕 3️⃣ Soll-Werte aus Rules extrahieren
                 ects_soll = {}
                 if "Studiengänge" in rules and masterstudiengang in rules["Studiengänge"]:
                     ects_soll = rules["Studiengänge"][masterstudiengang].get("ECTS_Anforderungen", {})
+
+                # 🧮 Automatische Entscheidung basierend auf Soll-/Ist-ECTS
+                auto_decision, auto_reason, ects_comparison_text = evaluate_ects_decision(ects_soll, ects_ist)
+
 
                 # 🆕 4️⃣ ECTS schön formatieren
                 ects_ist_text = (
@@ -178,31 +250,56 @@ def get_openai_decision(applicant_data: dict, rules: dict):
 
                 # 🆕 5️⃣ Prompt vorbereiten
                 user_prompt = f"""
-                Du bist Studienberater der HSBI. Der Bewerber ist interner Masterbewerber.
+                Du bist Bifi, der digitale Studienberater der Hochschule Bielefeld (HSBI).
+                Der Bewerber ist interner Masterbewerber.
 
-                Bewerberdaten:
-                {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
+                Deine Aufgabe:
+                🟩 Verwende ausschließlich die automatisch berechnete Entscheidung und Begründung unten.
+                🟥 Ändere sie nicht und rechne NICHT selbst mit den ECTS-Werten.
 
-                Studienregeln (aus Excel):
-                {json.dumps(rules, indent=2, ensure_ascii=False)}
+                ---
 
-                **ECTS-Vergleich laut Excel-Daten:**
+                📊 **Automatische Bewertung:**
+                - Entscheidung: **{auto_decision}**
+                - Begründung: **{auto_reason}**
 
-                Soll:
+                ---
+
+                📘 **ECTS-Vergleich laut Excel-Daten:**
+
+                **Soll-Werte:**
                 {ects_soll_text}
 
-                Ist (berechnet aus Bachelor-Struktur):
+                **Ist-Werte (berechnet aus Bachelor-Struktur):**
                 {ects_ist_text}
 
-                Analysiere die Voraussetzungen inkl. ECTS-Vergleich.
-                Zeige Soll/Ist und bewerte, ob die Anforderungen erfüllt sind.
+                **Direkter Vergleich:**
+                {ects_comparison_text}
 
-                Antworte im Markdown-Format:
-                - **Entscheidung:** Ja/Nein/Unklar
-                - **Begründung:** Warum oder warum nicht
-                - **ECTS-Vergleich:** Liste Soll/Ist und Bewertung auf
-                - **Weitere Voraussetzungen:** Note, Berufserfahrung, Englischkenntnisse
-                - **Bewerbungsunterlagen:** Welche Unterlagen erforderlich sind
+                ---
+
+                📋 **Bewerberdaten:**
+                {json.dumps(applicant_data, indent=2, ensure_ascii=False)}
+
+                ---
+
+                🧠 **Deine Aufgabe:**
+                Formuliere die endgültige Rückmeldung an den Bewerber basierend auf diesen Daten.
+                Verwende ausschließlich die automatische Entscheidung und Begründung oben und schreibe
+                eine klare, freundliche und professionelle Antwort im Markdown-Format.
+
+                Das Format muss exakt so aussehen:
+
+                - **Entscheidung:** {auto_decision}
+                - **Begründung:** Formuliere die automatische Begründung flüssig und verständlich.
+                - **ECTS-Vergleich:** Gib den direkten Vergleich aus ({ects_comparison_text}) und erkläre kurz, was das bedeutet.
+                - **Weitere Voraussetzungen:** Erwähne Note, Berufserfahrung und Englischkenntnisse aus den Bewerberdaten.
+                - **Bewerbungsunterlagen:** Liste auf, welche Unterlagen der Bewerber einreichen sollte.
+
+                ❗Wichtig:
+                - Du darfst keine neuen ECTS-Werte berechnen.
+                - Du darfst die Entscheidung nicht verändern.
+                - Antworte ausschließlich im **Markdown-Format** ohne Emojis oder Symbole.
                 """
 
         # 🔹 GPT-Aufruf

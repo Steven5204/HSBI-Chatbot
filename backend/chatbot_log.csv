@@ -59,3 +59,581 @@ timestamp,user_id,abschlussziel,studiengang,nutzerkategorie,entscheidung,status,
 2025-12-09T18:05:42.549381,64e25a4b-046c-47a5-880d-f50d821aadad,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,60
 2025-12-09T18:05:44.344717,64e25a4b-046c-47a5-880d-f50d821aadad,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,70
 2025-12-09T18:05:53.906033,64e25a4b-046c-47a5-880d-f50d821aadad,Master,Wirtschaftsingenieurwesen,master_intern,Ja,abgeschlossen,100
+2025-12-09T18:10:01.362005,329dd3bd-6d48-4a76-816c-7d8425330600,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-09T18:10:01.363526,329dd3bd-6d48-4a76-816c-7d8425330600,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-09T18:10:02.326611,329dd3bd-6d48-4a76-816c-7d8425330600,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-09T18:10:53.615745,4f0a74af-e346-49f0-a214-33818ec488c2,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-09T18:10:53.617267,4f0a74af-e346-49f0-a214-33818ec488c2,Bachelor,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:01:05.366016,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:01:05.367552,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:01:06.557523,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:01:14.039172,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:01:15.347364,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:01:16.609582,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-11T14:01:18.723411,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-11T14:01:20.382810,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:01:36.789313,410b181a-4bc1-4f36-8be3-8aa6cb8c88df,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-11T14:03:59.604204,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:03:59.604730,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:03:59.991812,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:04:10.144700,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:04:12.409218,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:04:20.248310,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Maschinenbau,Unbekannt,-,in_progress,50
+2025-12-11T14:04:22.636668,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-11T14:04:23.336819,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-11T14:04:24.321209,c2153f2c-95b0-4519-b7c4-c06b7fa9a7c4,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-11T14:04:29.183451,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:04:29.184984,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:04:29.694829,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:04:37.741934,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:04:38.771642,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:04:39.796510,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:04:41.063467,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-11T14:04:42.852596,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-11T14:04:43.577767,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Maschinenbau,Unbekannt,-,in_progress,90
+2025-12-11T14:04:52.269417,ebbc3f7f-e2fa-4bcc-a9c1-9331af039e97,Master,Maschinenbau,master_intern,Nein,abgeschlossen,100
+2025-12-11T14:05:48.284602,e5054f5b-2083-4548-9ac3-706bca92bc6c,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:05:48.285656,e5054f5b-2083-4548-9ac3-706bca92bc6c,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:05:48.915848,e5054f5b-2083-4548-9ac3-706bca92bc6c,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:05:52.151194,e5054f5b-2083-4548-9ac3-706bca92bc6c,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:06:26.266311,e0973907-cde6-48c2-8d7c-64ce048c94de,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:06:26.266842,e0973907-cde6-48c2-8d7c-64ce048c94de,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:06:26.747710,e0973907-cde6-48c2-8d7c-64ce048c94de,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:06:28.960428,e0973907-cde6-48c2-8d7c-64ce048c94de,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:13:08.509120,307af1c8-aa51-4b4e-b023-c3f840a99461,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:13:08.510636,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:13:09.557291,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:13:16.512169,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:13:17.430413,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:13:20.191363,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-11T14:13:22.245339,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-11T14:13:23.664999,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:13:31.474556,307af1c8-aa51-4b4e-b023-c3f840a99461,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-11T14:26:04.642826,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:26:04.643331,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:26:05.554398,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:26:13.231988,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:26:14.593629,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:26:15.839618,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-11T14:26:18.055665,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-11T14:26:19.127065,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:26:20.111293,5c8c14b5-9a0c-4eaa-92ff-58e0f9bba261,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-11T14:28:32.985615,3701aa4f-6866-45ca-8078-69bc1482db80,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:28:32.987671,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:28:33.755968,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:28:40.348283,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:28:41.270340,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:28:42.129191,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-11T14:28:44.370421,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-11T14:28:46.131234,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:28:53.937525,3701aa4f-6866-45ca-8078-69bc1482db80,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-11T14:34:35.853071,37d3c0a3-c123-44da-9980-4f7be2e2adf8,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:34:35.854615,37d3c0a3-c123-44da-9980-4f7be2e2adf8,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:34:36.412446,37d3c0a3-c123-44da-9980-4f7be2e2adf8,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:34:59.492868,19bfa807-c927-40f2-9328-05af72c26000,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:34:59.494403,19bfa807-c927-40f2-9328-05af72c26000,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:35:01.046098,19bfa807-c927-40f2-9328-05af72c26000,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:35:09.148918,19bfa807-c927-40f2-9328-05af72c26000,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:35:10.981654,19bfa807-c927-40f2-9328-05af72c26000,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:35:12.138456,19bfa807-c927-40f2-9328-05af72c26000,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:35:17.127137,19bfa807-c927-40f2-9328-05af72c26000,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:35:19.388941,19bfa807-c927-40f2-9328-05af72c26000,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T14:35:20.463502,19bfa807-c927-40f2-9328-05af72c26000,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T14:35:29.550458,19bfa807-c927-40f2-9328-05af72c26000,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-11T14:37:01.282009,050f4b59-039b-4c95-9055-4e40d5f06a86,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:37:01.282009,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:37:01.955831,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:37:09.913034,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:37:10.791074,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:37:12.110578,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:37:13.606416,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:37:15.511493,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T14:37:16.681337,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T14:37:26.160210,050f4b59-039b-4c95-9055-4e40d5f06a86,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-11T14:40:13.418931,28833b02-5cb4-4e29-be8e-68aa92949ad6,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:40:13.420455,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:40:14.760839,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:40:22.553414,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:40:23.357079,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:40:24.160237,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-11T14:40:26.443665,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-11T14:40:30.989069,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:40:41.710273,28833b02-5cb4-4e29-be8e-68aa92949ad6,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-11T14:42:07.538695,824cf2bf-267c-43dc-846f-b2b17f8be84d,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:42:07.539701,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:42:08.243584,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:42:15.311944,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:42:16.220183,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:42:17.006637,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:42:19.223659,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:42:21.250420,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T14:42:22.491875,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T14:42:32.421774,824cf2bf-267c-43dc-846f-b2b17f8be84d,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-11T14:45:30.885933,b247491b-c58f-458b-ac7c-3ba9551bc546,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:45:30.886440,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:45:31.447331,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:45:38.368692,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:45:39.475332,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:45:42.596903,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:45:53.296648,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:45:55.524780,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T14:45:56.210916,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T14:46:05.817410,b247491b-c58f-458b-ac7c-3ba9551bc546,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-11T14:46:37.216931,7d190838-e0e7-4138-a18a-92c9a923ffc5,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:46:37.218471,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:46:37.819649,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:46:45.520155,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:46:46.545090,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:46:47.592425,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-11T14:46:49.854493,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-11T14:46:50.606152,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:46:58.808311,7d190838-e0e7-4138-a18a-92c9a923ffc5,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-11T14:47:27.650248,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:47:27.650248,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:47:28.017153,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:47:32.749601,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:47:33.975036,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:47:35.705398,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:47:36.900011,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:47:39.944550,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T14:47:40.986608,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T14:47:50.643288,7adc0b87-1fd7-4e7c-9625-f62b0a003832,Master,Digitale Technologien,master_intern,Ja,abgeschlossen,100
+2025-12-11T14:49:07.470995,b02d3207-b821-43a9-befd-7525e823c9d8,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:49:07.472509,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:49:07.904048,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:49:13.748598,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:49:15.410863,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:49:17.637687,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:49:18.486703,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:49:22.757441,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T14:49:24.384229,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T14:49:33.636302,b02d3207-b821-43a9-befd-7525e823c9d8,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-11T14:51:00.287246,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:51:00.288758,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:51:00.662900,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:51:06.631661,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:51:07.956665,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:51:09.479640,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:51:10.323590,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T14:51:12.412804,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T14:51:13.556136,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T14:51:22.687207,951c5d6b-33d4-4f83-ae3d-7cd65b633d2d,Master,Digitale Technologien,master_intern,Ja,abgeschlossen,100
+2025-12-11T14:52:10.949283,0e6943f6-9f60-4c26-8791-e2263884dfe4,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:52:10.949283,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:52:11.373127,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:52:17.496908,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:52:18.517250,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T14:52:19.248271,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T14:52:20.766117,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,70
+2025-12-11T14:52:25.987451,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,80
+2025-12-11T14:52:27.929473,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,90
+2025-12-11T14:52:37.400285,0e6943f6-9f60-4c26-8791-e2263884dfe4,Master,Wirtschaftsingenieurwesen,master_intern,Nein,abgeschlossen,100
+2025-12-11T14:54:00.772982,64d894d2-89dc-43d6-ae70-6478f7ff8670,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:54:00.774034,64d894d2-89dc-43d6-ae70-6478f7ff8670,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:54:01.462626,64d894d2-89dc-43d6-ae70-6478f7ff8670,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:54:07.033480,64d894d2-89dc-43d6-ae70-6478f7ff8670,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:54:08.665885,64d894d2-89dc-43d6-ae70-6478f7ff8670,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,40
+2025-12-11T14:54:10.802703,64d894d2-89dc-43d6-ae70-6478f7ff8670,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,50
+2025-12-11T14:54:11.736847,64d894d2-89dc-43d6-ae70-6478f7ff8670,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,60
+2025-12-11T14:54:17.106270,64d894d2-89dc-43d6-ae70-6478f7ff8670,Master,Angewandte Automatisierung,master_extern,Ja,abgeschlossen,100
+2025-12-11T14:55:37.501727,1d8eff04-a1e8-4ef2-ba2a-c30a70ae169f,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:55:37.502731,1d8eff04-a1e8-4ef2-ba2a-c30a70ae169f,Bachelor,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:55:38.458236,1d8eff04-a1e8-4ef2-ba2a-c30a70ae169f,Bachelor,Bachelor,bachelorbewerber,Unklar,abgeschlossen,100
+2025-12-11T14:55:49.133090,8bf5b131-9888-4d7c-b8aa-fd66f4516a51,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:55:49.133623,8bf5b131-9888-4d7c-b8aa-fd66f4516a51,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:55:59.136592,326deb08-da11-4fc4-9901-f7dae86a9592,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:55:59.137596,326deb08-da11-4fc4-9901-f7dae86a9592,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:55:59.732332,326deb08-da11-4fc4-9901-f7dae86a9592,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:56:05.088172,326deb08-da11-4fc4-9901-f7dae86a9592,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:56:06.597389,326deb08-da11-4fc4-9901-f7dae86a9592,Master,Maschinenbau,Unbekannt,-,in_progress,40
+2025-12-11T14:56:08.621268,326deb08-da11-4fc4-9901-f7dae86a9592,Master,Maschinenbau,Unbekannt,-,in_progress,50
+2025-12-11T14:56:09.714547,326deb08-da11-4fc4-9901-f7dae86a9592,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-11T14:56:15.093336,326deb08-da11-4fc4-9901-f7dae86a9592,Master,Maschinenbau,master_extern,Ja,abgeschlossen,100
+2025-12-11T14:56:32.519344,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:56:32.520862,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:56:33.668660,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:56:37.139516,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:56:38.199407,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Master,Maschinenbau,Unbekannt,-,in_progress,40
+2025-12-11T14:56:40.570783,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Master,Maschinenbau,Unbekannt,-,in_progress,50
+2025-12-11T14:56:42.318911,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-11T14:56:49.044240,05ad2d96-ec92-4b45-ba94-55eca7c29c3c,Master,Maschinenbau,master_extern,Ja,abgeschlossen,100
+2025-12-11T14:57:52.259078,6c106516-d3d7-454d-b57e-62dd324398bd,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T14:57:52.259078,6c106516-d3d7-454d-b57e-62dd324398bd,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T14:57:52.686365,6c106516-d3d7-454d-b57e-62dd324398bd,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T14:57:56.922591,6c106516-d3d7-454d-b57e-62dd324398bd,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T14:57:58.340928,6c106516-d3d7-454d-b57e-62dd324398bd,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,40
+2025-12-11T14:58:06.212740,6c106516-d3d7-454d-b57e-62dd324398bd,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,50
+2025-12-11T14:58:09.979861,6c106516-d3d7-454d-b57e-62dd324398bd,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,60
+2025-12-11T14:58:16.133718,6c106516-d3d7-454d-b57e-62dd324398bd,Master,Wirtschaftsingenieurwesen,master_extern,Ja,abgeschlossen,100
+2025-12-11T15:02:58.655306,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T15:02:58.656834,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T15:02:59.563463,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T15:03:05.630082,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T15:03:06.555498,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T15:03:07.260819,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-11T15:03:08.049332,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-11T15:03:09.928137,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-11T15:03:13.451176,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-11T15:03:20.022717,00dc887b-1f31-4ec3-a6ec-c50391299d0e,Master,Digitale Technologien,master_intern,Ja,abgeschlossen,100
+2025-12-11T15:05:14.435801,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T15:05:14.437328,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T15:05:16.457615,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T15:05:24.127436,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T15:05:25.900462,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-11T15:05:28.268840,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Unbekannt,Unbekannt,-,in_progress,50
+2025-12-11T15:05:29.533564,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-11T15:05:32.209927,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-11T15:05:33.715764,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-11T15:05:42.244239,9a1ab360-4797-430a-bc42-ea4d781fbaf2,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-11T15:06:05.862504,74e0b0ed-f08e-4179-b7b2-d25580e30192,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T15:06:05.864015,74e0b0ed-f08e-4179-b7b2-d25580e30192,Bachelor,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T15:06:12.333581,74e0b0ed-f08e-4179-b7b2-d25580e30192,Bachelor,Bachelor,bachelorbewerber,Unklar,abgeschlossen,100
+2025-12-11T15:06:12.335131,c50edeab-62f0-42f8-81f1-900a788c1a34,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T15:06:12.335131,c50edeab-62f0-42f8-81f1-900a788c1a34,Bachelor,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T15:06:15.280775,02164bbe-0737-4768-b027-2adc8b0eae7d,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T15:06:15.282112,02164bbe-0737-4768-b027-2adc8b0eae7d,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T15:06:19.328983,20a8be61-e51c-417b-aa03-665ac364d868,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T15:06:19.330494,20a8be61-e51c-417b-aa03-665ac364d868,Bachelor,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T15:06:20.992875,20a8be61-e51c-417b-aa03-665ac364d868,Bachelor,Bachelor,bachelorbewerber,Unklar,abgeschlossen,100
+2025-12-11T15:07:02.717935,d852be64-be08-4f97-8c91-4b1ef8813dbf,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-11T15:07:02.719457,d852be64-be08-4f97-8c91-4b1ef8813dbf,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-11T15:07:03.709578,d852be64-be08-4f97-8c91-4b1ef8813dbf,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-11T15:07:06.443272,d852be64-be08-4f97-8c91-4b1ef8813dbf,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-11T15:07:07.251330,d852be64-be08-4f97-8c91-4b1ef8813dbf,Master,Digitale Technologien,Unbekannt,-,in_progress,40
+2025-12-11T15:07:09.218783,d852be64-be08-4f97-8c91-4b1ef8813dbf,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-11T15:07:11.832336,d852be64-be08-4f97-8c91-4b1ef8813dbf,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-11T15:07:17.981834,d852be64-be08-4f97-8c91-4b1ef8813dbf,Master,Digitale Technologien,master_extern,Ja,abgeschlossen,100
+2025-12-12T10:38:08.611008,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T10:38:08.612525,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T10:38:12.200435,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T10:38:25.141166,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T10:38:28.446963,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T10:38:31.028359,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T10:38:41.992190,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T10:38:46.360394,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T10:38:51.817978,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T10:38:59.947357,677ee3da-868a-4061-9b0e-b9f9fc6dd14e,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-12T10:40:55.957190,fd6f1318-08cc-4609-b284-b96f6b89e27f,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T10:40:55.957190,fd6f1318-08cc-4609-b284-b96f6b89e27f,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T10:40:56.560016,fd6f1318-08cc-4609-b284-b96f6b89e27f,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T10:44:26.017439,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T10:44:26.017439,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T10:44:27.894343,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T10:44:34.170377,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T10:44:35.165061,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T10:44:36.841921,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T10:44:38.172138,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T10:44:40.323529,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T10:44:41.548704,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T10:44:48.484181,371876a4-5cfb-48f2-a4ea-e64c9e5df58d,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-12T10:45:09.856322,39a41b54-8685-4b9c-8361-35b04bb7c25e,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T10:45:09.856322,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T10:45:10.653391,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T10:45:17.950646,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T10:45:19.050852,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T10:45:19.793911,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T10:45:20.891459,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T10:45:23.059610,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T10:45:23.703094,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T10:45:28.454424,39a41b54-8685-4b9c-8361-35b04bb7c25e,Master,Digitale Technologien,master_intern,Ja,abgeschlossen,100
+2025-12-12T10:50:45.598195,94e04928-6eba-4ba2-90a9-482a28aae664,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T10:50:45.598195,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T10:50:46.063878,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T10:50:50.505402,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T10:50:52.706493,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T10:50:53.581658,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Unbekannt,Unbekannt,-,in_progress,50
+2025-12-12T10:50:54.475064,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-12T10:50:57.038296,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T10:50:57.978347,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-12T10:51:05.454924,94e04928-6eba-4ba2-90a9-482a28aae664,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-12T10:57:43.446846,1b7ba65f-e534-40b8-8816-65dc4a386a27,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T10:57:43.448356,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T10:57:43.859158,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T10:57:48.273434,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T10:57:49.369367,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T10:57:50.065515,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Unbekannt,Unbekannt,-,in_progress,50
+2025-12-12T10:57:51.214094,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-12T10:57:52.999325,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T10:57:54.745010,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-12T10:58:00.658982,1b7ba65f-e534-40b8-8816-65dc4a386a27,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-12T11:00:06.961884,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T11:00:06.962938,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T11:00:07.508186,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T11:00:11.697415,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T11:00:12.822762,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T11:00:23.114202,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Maschinenbau,Unbekannt,-,in_progress,50
+2025-12-12T11:00:25.318694,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-12T11:00:25.985357,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T11:00:26.905800,7bbdf324-95de-4b8f-97a1-8b33bdd88eee,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-12T11:00:32.792674,ec719010-67b9-463e-b81d-9ea09cbf568b,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T11:00:32.792674,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T11:00:33.266587,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T11:00:37.877292,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T11:00:39.235894,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T11:00:41.379548,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Unbekannt,Unbekannt,-,in_progress,50
+2025-12-12T11:00:42.518278,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-12T11:00:44.328236,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T11:00:45.119595,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-12T11:00:54.719512,ec719010-67b9-463e-b81d-9ea09cbf568b,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-12T12:11:32.904006,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T12:11:32.905533,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T12:11:34.148357,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T12:11:40.768824,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T12:11:42.572034,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T12:11:43.816254,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Unbekannt,Unbekannt,-,in_progress,50
+2025-12-12T12:11:45.012774,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-12T12:11:47.042719,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T12:11:47.873127,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-12T12:11:53.973888,06b2bcdf-4f0f-44eb-80b7-41691626bd40,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-12T12:11:58.062646,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T12:11:58.063166,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T12:11:58.405405,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T12:12:03.726194,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T12:12:05.106102,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T12:12:05.772032,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T12:12:07.323809,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T12:12:09.356129,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T12:12:10.090663,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T12:12:19.807992,b0b3eeba-87db-4ea3-8d69-ca405cf345f5,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T12:14:06.707631,e84a6a1f-1afb-4143-be39-1b497d2a4873,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T12:14:06.707631,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T12:14:07.146190,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T12:14:13.877440,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T12:14:14.936068,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T12:14:15.816856,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T12:14:17.177592,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,70
+2025-12-12T12:14:19.701042,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,80
+2025-12-12T12:14:20.398342,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,90
+2025-12-12T12:14:39.024351,e84a6a1f-1afb-4143-be39-1b497d2a4873,Master,Wirtschaftsingenieurwesen,master_intern,Nein,abgeschlossen,100
+2025-12-12T12:16:35.869014,408a0915-71e5-4124-8fee-a90378498471,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T12:16:35.870528,408a0915-71e5-4124-8fee-a90378498471,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T12:16:36.344365,408a0915-71e5-4124-8fee-a90378498471,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T12:35:03.168830,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T12:35:03.170369,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T12:35:04.262787,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T12:35:10.216547,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T12:35:11.450635,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T12:35:13.069630,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-12T12:35:14.878093,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-12T12:35:15.571973,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T12:35:26.927181,f19d7c8d-11ce-4e23-9e19-1fc1cd3668ee,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-12T12:43:56.100121,3e4bcb9e-ec09-4536-8ef1-88b777da6690,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T12:43:56.100121,3e4bcb9e-ec09-4536-8ef1-88b777da6690,Bachelor,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T12:44:06.397171,3e4bcb9e-ec09-4536-8ef1-88b777da6690,Bachelor,Bachelor,bachelorbewerber,Unklar,abgeschlossen,100
+2025-12-12T12:44:14.091074,6b8415f0-4594-40e0-b7c3-663d26c79a18,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T12:44:14.091579,6b8415f0-4594-40e0-b7c3-663d26c79a18,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:00:02.992032,33acef0d-416b-4925-9b21-3cd81db95443,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:00:02.992032,33acef0d-416b-4925-9b21-3cd81db95443,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:00:04.398148,33acef0d-416b-4925-9b21-3cd81db95443,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:00:09.283150,33acef0d-416b-4925-9b21-3cd81db95443,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:00:10.966491,33acef0d-416b-4925-9b21-3cd81db95443,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:00:12.734316,33acef0d-416b-4925-9b21-3cd81db95443,Master,Unbekannt,Unbekannt,-,in_progress,50
+2025-12-12T13:00:14.204240,33acef0d-416b-4925-9b21-3cd81db95443,Master,Maschinenbau,Unbekannt,-,in_progress,60
+2025-12-12T13:00:16.340006,33acef0d-416b-4925-9b21-3cd81db95443,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T13:00:17.054916,33acef0d-416b-4925-9b21-3cd81db95443,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-12T13:00:25.555018,33acef0d-416b-4925-9b21-3cd81db95443,Master,Maschinenbau,master_intern,Unklar,abgeschlossen,100
+2025-12-12T13:08:49.870335,1f24627d-0739-4e29-b43b-6332ab517318,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:08:49.871869,1f24627d-0739-4e29-b43b-6332ab517318,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:08:50.311754,1f24627d-0739-4e29-b43b-6332ab517318,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:08:55.268659,1f24627d-0739-4e29-b43b-6332ab517318,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:08:56.838057,1f24627d-0739-4e29-b43b-6332ab517318,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:08:58.425472,1f24627d-0739-4e29-b43b-6332ab517318,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:08:59.368741,1f24627d-0739-4e29-b43b-6332ab517318,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T13:09:07.556943,1f24627d-0739-4e29-b43b-6332ab517318,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-12T13:09:08.734934,1f24627d-0739-4e29-b43b-6332ab517318,Master,Maschinenbau,Unbekannt,-,in_progress,90
+2025-12-12T13:09:17.972942,1f24627d-0739-4e29-b43b-6332ab517318,Master,Maschinenbau,master_intern,Nein,abgeschlossen,100
+2025-12-12T13:10:32.721157,178e8be9-2bab-4be7-84b6-3f8604126411,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:10:32.721157,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:10:33.140867,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:10:46.745112,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:10:48.330813,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:10:52.886851,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:10:56.232152,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T13:10:58.991364,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T13:10:59.713725,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T13:11:13.560576,178e8be9-2bab-4be7-84b6-3f8604126411,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T13:12:11.376991,35b7378e-138a-466e-afa1-895e45104cb8,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:12:11.377510,35b7378e-138a-466e-afa1-895e45104cb8,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:12:11.805321,35b7378e-138a-466e-afa1-895e45104cb8,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:12:24.745037,35b7378e-138a-466e-afa1-895e45104cb8,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:12:25.974446,35b7378e-138a-466e-afa1-895e45104cb8,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:12:28.306777,35b7378e-138a-466e-afa1-895e45104cb8,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:12:32.366728,35b7378e-138a-466e-afa1-895e45104cb8,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,70
+2025-12-12T13:12:35.055027,35b7378e-138a-466e-afa1-895e45104cb8,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,80
+2025-12-12T13:12:36.006815,35b7378e-138a-466e-afa1-895e45104cb8,Master,Wirtschaftsingenieurwesen,Unbekannt,-,in_progress,90
+2025-12-12T13:12:45.661068,35b7378e-138a-466e-afa1-895e45104cb8,Master,Wirtschaftsingenieurwesen,master_intern,Nein,abgeschlossen,100
+2025-12-12T13:15:15.855183,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:15:15.856236,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:15:16.343070,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:15:37.597235,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:15:38.844518,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:15:42.897188,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:15:44.645768,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T13:15:47.079477,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T13:15:47.795773,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T13:15:56.336576,5924dfdc-2bb9-466f-b05b-b41e2a7657bb,Master,Angewandte Automatisierung,master_intern,Ja,abgeschlossen,100
+2025-12-12T13:40:52.292762,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:40:52.294303,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:40:53.061520,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:40:58.693744,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:41:02.623558,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:41:06.508136,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:41:09.080498,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T13:41:11.411068,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T13:41:16.109225,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T13:41:26.089424,b0c571fe-3d59-48d5-aa6f-8a05c830d510,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T13:46:18.452562,47884215-f9ba-4f7e-ae0d-649ae473aa14,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:46:18.453066,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:46:19.639092,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:46:31.628253,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:46:33.987886,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:46:35.441358,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:46:36.856039,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T13:46:39.955301,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T13:46:40.994544,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T13:46:49.284251,47884215-f9ba-4f7e-ae0d-649ae473aa14,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T13:48:40.477930,829fa758-b809-40cf-af19-a896ce629a0f,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:48:40.479456,829fa758-b809-40cf-af19-a896ce629a0f,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:48:40.914158,829fa758-b809-40cf-af19-a896ce629a0f,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:48:46.141293,829fa758-b809-40cf-af19-a896ce629a0f,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:48:47.280953,829fa758-b809-40cf-af19-a896ce629a0f,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:48:48.274654,829fa758-b809-40cf-af19-a896ce629a0f,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:48:50.004036,829fa758-b809-40cf-af19-a896ce629a0f,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T13:48:52.633855,829fa758-b809-40cf-af19-a896ce629a0f,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T13:48:54.610040,829fa758-b809-40cf-af19-a896ce629a0f,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T13:49:02.898344,829fa758-b809-40cf-af19-a896ce629a0f,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T13:53:26.565431,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:53:26.565431,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:53:26.945943,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:53:40.065882,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:53:41.055812,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:53:42.108903,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:53:43.115194,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T13:53:45.086689,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T13:53:46.197296,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T13:53:56.864973,b6b2e5a5-1572-43f1-99b2-685d29bb6d8c,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T13:58:10.510528,f9cfd388-19f9-4508-8f28-553d0a836d58,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T13:58:10.510528,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T13:58:10.960345,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T13:58:16.099074,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T13:58:17.330425,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T13:58:20.117345,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T13:58:21.550214,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T13:58:23.961695,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T13:58:25.199609,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T13:58:38.093410,f9cfd388-19f9-4508-8f28-553d0a836d58,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T14:01:12.282749,c67413f7-e0f7-4ab4-b629-e38a83d3a458,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:01:12.284258,c67413f7-e0f7-4ab4-b629-e38a83d3a458,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:01:12.683546,c67413f7-e0f7-4ab4-b629-e38a83d3a458,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:01:17.393480,c67413f7-e0f7-4ab4-b629-e38a83d3a458,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:01:18.594346,c67413f7-e0f7-4ab4-b629-e38a83d3a458,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:01:19.932596,c67413f7-e0f7-4ab4-b629-e38a83d3a458,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,50
+2025-12-12T14:01:30.083584,831caffe-9967-4e64-9f99-d998e8801c9f,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:01:30.083584,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:01:30.505495,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:01:37.388126,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:01:41.504536,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:01:42.641709,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:01:44.082228,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T14:01:46.598591,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T14:01:47.944660,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T14:01:55.836870,831caffe-9967-4e64-9f99-d998e8801c9f,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T14:02:07.287042,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:02:07.287548,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:02:07.838470,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:02:13.391464,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:02:14.327518,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:02:22.439676,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Digitale Technologien,Unbekannt,-,in_progress,50
+2025-12-12T14:02:24.189802,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Digitale Technologien,Unbekannt,-,in_progress,60
+2025-12-12T14:02:25.739631,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T14:02:32.369439,a65a0b63-1aa7-40cb-9f76-60641ec3c0c3,Master,Digitale Technologien,master_intern,Unklar,abgeschlossen,100
+2025-12-12T14:03:13.914125,078da478-baac-4287-af73-51e3ad7b74a4,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:03:13.914630,078da478-baac-4287-af73-51e3ad7b74a4,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:03:14.344302,078da478-baac-4287-af73-51e3ad7b74a4,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:03:22.698338,078da478-baac-4287-af73-51e3ad7b74a4,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:03:23.783191,078da478-baac-4287-af73-51e3ad7b74a4,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:03:24.517618,078da478-baac-4287-af73-51e3ad7b74a4,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:03:25.623712,078da478-baac-4287-af73-51e3ad7b74a4,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T14:03:27.823869,078da478-baac-4287-af73-51e3ad7b74a4,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T14:03:29.013734,078da478-baac-4287-af73-51e3ad7b74a4,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T14:03:34.348335,078da478-baac-4287-af73-51e3ad7b74a4,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-12T14:10:05.112659,931da413-50d5-4aaf-ac4d-7ce0da650a02,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:10:05.114195,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:10:07.403625,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:10:13.060182,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:10:14.366202,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:10:15.070868,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:10:15.688502,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T14:10:17.530307,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T14:10:18.119990,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T14:10:23.565447,931da413-50d5-4aaf-ac4d-7ce0da650a02,Master,Angewandte Automatisierung,master_intern,Nein,abgeschlossen,100
+2025-12-12T14:25:58.920735,1d0d05c8-2b57-4170-8783-89dd40dad736,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:25:58.922243,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:25:59.288423,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:26:05.171621,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:26:06.533674,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:26:07.417065,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:26:07.951565,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T14:26:09.842395,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T14:26:10.719688,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T14:26:15.974490,1d0d05c8-2b57-4170-8783-89dd40dad736,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-12T14:29:39.817494,6e0773e5-0457-43ca-978a-e0323dcce1ec,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:29:39.819025,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:29:40.464857,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:29:49.223213,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:29:50.593055,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:29:53.716270,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:30:03.815144,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T14:30:06.807125,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T14:30:07.420880,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T14:30:13.546289,6e0773e5-0457-43ca-978a-e0323dcce1ec,Master,Digitale Technologien,master_intern,Nein,abgeschlossen,100
+2025-12-12T14:32:47.622649,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:32:47.623156,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:32:48.027911,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:32:56.125359,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:32:57.255624,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:32:57.946398,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:32:58.984083,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T14:33:01.147223,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T14:33:03.316134,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T14:33:08.403043,4bb439e5-2c27-4ef3-9fd9-28185d240d80,Master,Digitale Technologien,master_intern,Ja,abgeschlossen,100
+2025-12-12T14:33:41.288221,1b0d9c98-4265-471f-bf13-6689f503b1e7,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:33:41.289735,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:33:41.967597,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:33:47.260832,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:33:48.384011,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:33:50.382268,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:33:51.173543,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T14:33:53.134974,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T14:33:53.872857,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T14:33:58.111843,1b0d9c98-4265-471f-bf13-6689f503b1e7,Master,Angewandte Automatisierung,master_intern,Unklar,abgeschlossen,100
+2025-12-12T14:38:35.693146,1a792633-6a32-4b0d-a159-56e85b64952b,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:38:35.694685,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:38:36.607207,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:38:43.108164,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:38:44.147196,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:38:44.700999,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:38:45.885200,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Digitale Technologien,Unbekannt,-,in_progress,70
+2025-12-12T14:38:47.779301,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Digitale Technologien,Unbekannt,-,in_progress,80
+2025-12-12T14:38:49.378469,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Digitale Technologien,Unbekannt,-,in_progress,90
+2025-12-12T14:38:56.502878,1a792633-6a32-4b0d-a159-56e85b64952b,Master,Digitale Technologien,master_intern,Ja,abgeschlossen,100
+2025-12-12T14:39:17.769184,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:39:17.769690,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:39:18.244501,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:39:23.871928,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:39:25.194324,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:39:26.152128,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:39:27.063909,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,70
+2025-12-12T14:39:28.968063,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,80
+2025-12-12T14:39:29.729514,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Angewandte Automatisierung,Unbekannt,-,in_progress,90
+2025-12-12T14:39:36.014971,2b3653ca-0f24-4b0d-b67e-a6851728b8ac,Master,Angewandte Automatisierung,master_intern,Unklar,abgeschlossen,100
+2025-12-12T14:40:01.185484,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Unbekannt,Unbekannt,Unbekannt,-,gestartet,0
+2025-12-12T14:40:01.186007,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Unbekannt,Unbekannt,-,in_progress,10
+2025-12-12T14:40:02.274404,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Unbekannt,Unbekannt,-,in_progress,20
+2025-12-12T14:40:06.821612,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Unbekannt,Unbekannt,-,in_progress,30
+2025-12-12T14:40:08.142590,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Unbekannt,Unbekannt,-,in_progress,40
+2025-12-12T14:40:09.912468,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Unbekannt,Unbekannt,-,in_progress,60
+2025-12-12T14:40:10.631531,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Maschinenbau,Unbekannt,-,in_progress,70
+2025-12-12T14:40:12.961785,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Maschinenbau,Unbekannt,-,in_progress,80
+2025-12-12T14:40:13.649249,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Maschinenbau,Unbekannt,-,in_progress,90
+2025-12-12T14:40:20.391479,4526d06f-2ed9-4f2c-bda5-f18f86824ce1,Master,Maschinenbau,master_intern,Nein,abgeschlossen,100
