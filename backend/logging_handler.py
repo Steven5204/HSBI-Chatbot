@@ -97,7 +97,7 @@ def generate_report(days: int = 30):
     total_users = df["user_id"].nunique()
     completed_users = df[
         (df["status"] == "abgeschlossen")
-        & (df["entscheidung"].str.lower().isin(["ja"]))
+        & (df["entscheidung"].str.lower().isin(["ja", "unklar"]))
     ]["user_id"].nunique()
     dropped_users = total_users - completed_users
     dropout_rate = round((dropped_users / total_users * 100), 2) if total_users > 0 else 0

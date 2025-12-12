@@ -123,9 +123,9 @@ def calculate_bachelor_ects(studiengang: str, studienart: str, vertiefung: str):
 
         # Filter anwenden
         subset = df_zus[
-            (df_zus[col_bachelor].str.lower() == studiengang.lower())
-            & (df_zus[col_studienart].str.lower() == studienart.lower())
-            & (df_zus[col_vertiefung].str.lower() == vertiefung.lower())
+            (df_zus[col_bachelor].astype(str).str.strip().str.lower() == studiengang.strip().lower())
+            & (df_zus[col_studienart].astype(str).str.strip().str.lower() == studienart.strip().lower())
+            & (df_zus[col_vertiefung].astype(str).str.strip().str.lower() == vertiefung.strip().lower())
         ]
 
         if subset.empty:
